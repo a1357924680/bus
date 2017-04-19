@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- sql映射文件，作用是将java类与数据库的表通过SQL映射文件关联起来 -->
+
+<mapper namespace="com.pz.mapper.BusMapper">
+	<!-- 添加公交路线 -->
+	<insert id="insertBus" parameterType="com.pz.bean.Bus">
+		insert into bus values(seq_bid.nextval,#{bname},#{bline},#{bbegin},#{bstop})
+	</insert>
+	
+	<!-- 修改公交信息 -->
+	<update id="updateBus" parameterType="com.pz.bean.Bus">
+		update bus set bname=#{bname},bline=#{bline},bbegin=#{bbegin},bstop=#{bstop} where bid=#{bid}
+	</update>
+	
+	<!-- 删除公交信息 -->
+	<delete id="deleteBus" parameterType="com.pz.bean.Bus">
+		delete bus where bid=#{bid}
+	</delete>
+	
+	<!-- 查询公交 -->
+	<select id="findBus"  parameterType="com.pz.bean.Bus"  resultType="com.pz.bean.Bus">
+		select * from bus where 1=1
+		<if test="bline!=null">
+			and bline like #{bline}
+		</if>
+		<if test="bname!=null">
+			and bname like #{bname}
+		</if>
+	</select>
+	
+	
+</mapper>

@@ -1,0 +1,50 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  
+  <!--  <filter>
+  	<filter-name>RightFilter</filter-name>
+  	<filter-class>com.yc.web.filters.RightFilter</filter-class>
+  </filter>  -->
+  <filter>
+  	<filter-name>characterEncodingFilter</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>utf-8</param-value>
+  	</init-param>
+  </filter>
+   <!-- <filter-mapping>
+  	<filter-name>RightFilter</filter-name>
+  	<url-pattern>/admin/*</url-pattern>
+  </filter-mapping>  -->
+  <filter-mapping>
+  	<filter-name>characterEncodingFilter</filter-name>
+  	<url-pattern>*</url-pattern>
+  </filter-mapping>
+  
+  
+  
+  <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <!-- dispatcherServlet启动后将会寻找一个在应用程序的WEB-INF目录下的配置文件 -->
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- 配置spring mvc配置文件的位置 -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <!-- 在这个文件中一定要读取或包含beans.xml -->
+            <param-value>/WEB-INF/config/simple-config.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <!-- 写/的话，所有的请求都会被spring mvc的分发器拦截到，所以最好对静态资源单独处理，请在spring配置文件中设置 -->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+  
+  
+</web-app>

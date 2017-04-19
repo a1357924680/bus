@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- xml配置 即可多包扫描 和语句注解 混合使用 结合两者 的优点 删除了config 1.自己写的类使用注解(dao,biz controller(servlet)) 
+		2.不是自己写的，第三方框架的类、使用xml配置 3.AOP切面，也可以采用两种方法 a、事物处理 xml b、其他的切面增强 注解 -->
+	<!-- 扫描包 -->
+	
+	
+	
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<bean class="org.springframework.http.MediaType">
+								<constructor-arg index="0" value="text"/>
+								<constructor-arg index="1" value="json"/>
+								<constructor-arg index="2" value="UTF-8"/>
+							</bean>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<context:component-scan base-package="com.pz"/>
+	
+	<context:property-placeholder location="classpath*:db.properties" />
+
+	<!--spring 整合mybatis/Hibernate/jdbc/jpa的配置思路： 1.配置数据源(->数据连接池) -》2.如果使用了dao框架，都要求配置连接回话工厂-》3.由工厂创建回话，注入到dao层中 -->
+
+
+	<!-- 引入的数据库连接 引入包的版本为2.多 所以要改dbcp2 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	<!-- 取得sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 读取mybatis的配置文件 mybatis的配置不要 <property name="configLocation" value="mybatis-config.xml"/> -->
+
+		<!-- 整合mybatis-config.xml 配置文件 到bean.xml中 -->
+		<!-- 读取mapper的配置文件信息 -->
+		<property name="configurationProperties">
+			<props>
+				<prop key="logImpl">LOG4J</prop>
+			</props>
+		</property>
+
+		<!--别名的包的位置 -->
+		<!-- <property name="typeAliasesPackage" value="com.pz.bean">
+		</property> -->
+
+		<!-- 配置mapper的映射文件的位置 -->
+		<property name="mapperLocations" value="classpath*:com/pz/mapper/*.xml"></property>
+
+	</bean>
+
+	<!-- 事务的配置 -->
+	<tx:annotation-driven transaction-manager="txManager" />
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 由spring 替代事物的增强 -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<!-- spring 只支持方法级别的增强 所以这里配置那些要增强的方法 -->
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="retrieve*" read-only="true" />
+			<tx:method name="*" read-only="false" />
+		</tx:attributes>
+	</tx:advice>
+
+
+	
+
+</beans>

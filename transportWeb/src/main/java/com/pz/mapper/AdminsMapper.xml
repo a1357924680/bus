@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- sql映射文件，作用是将java类与数据库的表通过SQL映射文件关联起来 -->
+
+<mapper namespace="com.pz.mapper.AdminsMapper">
+	<!-- 添加管理员 -->
+	<insert id="insertAdmin" parameterType="com.pz.bean.Admins">
+		insert into admins values(seq_aid.nextval,#{apwd})
+	</insert>
+	
+	<!-- 修改管理员密码 -->
+	<update id="updatePwd" parameterType="com.pz.bean.Admins">
+		update admins set apwd=#{apwd} where aid=#{aid}
+	</update>
+	
+	<!-- 删除管理员 -->
+	<delete id="deleteAdmin" parameterType="com.pz.bean.Admins">
+		delete admins where aid=#{aid}
+	</delete>
+	
+	<!-- 管理员登录 -->
+	<select id="adminLogin" parameterType="com.pz.bean.Admins" resultType="com.pz.bean.Admins">
+		select * from admins where aid=#{aid} and apwd=#{apwd}
+	</select>
+</mapper>
