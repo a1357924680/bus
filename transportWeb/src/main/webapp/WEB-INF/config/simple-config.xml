@@ -21,17 +21,20 @@
 	<!-- 加入视图解析器，简化view路径 -->
 	<bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/" />
+		<property name="prefix" value="/admin/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 	<!-- 启用mvc的注解解析器 -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven/>
 	<!-- 静态资源的处理方式 -->
 	<mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
 	<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
 	<mvc:resources location="/easyui/" mapping="/easyui/**"></mvc:resources>
 	<mvc:resources location="/images/" mapping="/images/**"></mvc:resources>
 	<mvc:resources location="/ueditor/" mapping="/ueditor/**"></mvc:resources>
+	<mvc:resources location="/static/" mapping="/static/**"></mvc:resources>
+	<mvc:resources location="/bootstrap3/" mapping="/bootstrap3/**"></mvc:resources>
+	<mvc:resources location="/jquery-easyui-1.3.3/" mapping="/jquery-easyui-1.3.3/**"></mvc:resources>
 	<mvc:resources location="/" mapping="/*.html"></mvc:resources>
 
 
