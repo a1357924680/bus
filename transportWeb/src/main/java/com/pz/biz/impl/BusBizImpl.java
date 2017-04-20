@@ -171,7 +171,7 @@ public class BusBizImpl implements BusBiz {
 							String endLine=subLine(stopList.get(j).getBline(), Integer.parseInt(stations[n]), stop);
 							//写进map中  -->  <起点公交名=>终点公交名,起点公交路线=>转乘=>终点公交路线>
 							if(startLine!=null && endLine!=null){
-								busMap.put(startList.get(i).getBname()+"==>转乘==>"+stopList.get(j).getBname(), startLine+"==>转乘==>"+endLine);
+								busMap.put(startList.get(i).getBname()+"&"+stopList.get(j).getBname(), startLine+"&"+endLine);
 							}
 							
 						}
