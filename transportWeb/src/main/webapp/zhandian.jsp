@@ -80,61 +80,26 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="alert alert-info">
-							Welcome in the <strong>Unicorn Admin 城市公交查询网站</strong>
+							Welcome in the <strong>Unicorn Admin 站点查询</strong>
 							<a href="#" data-dismiss="alert" class="close">×</a>
 						</div>
 					</div>	
 				</div>
 				
-				
-				
 				<div class="panel panel-default">
-				 <div class="panel-heading"> <h3>系统分析</h3></div>
-				  <div class="panel-body">
-				   <p>我国城市公交乘客信息系统的发展处于一个较落后的水平,广大乘客可以获得信息的方式很少,为了解决这种问题,加快发展城市公交信息化，设计一个城市公交查询系统是具有一定实际应用意义的。</p>
-				  </div>
-				  <table class="table">
-    
-  					</table>
+				 
+					  <div class="panel-heading"><h3>站点查询</h3></div>
+					  <div class="panel-body">
+					    <p>站点查询(站点名称)</p>
+					  </div>
+						 <input type="address" id="inputaddress" class="form-control"  required autofocus>
+					  <!-- Table -->
+					  <table class="table">
+					    <button type="button" class="btn btn-primary">查询</button>
+					  </table>
 				</div>
 				
-				<div>
-					<p>我国城市公交乘客信息系统的发展处于一个较落后的水平,广大乘客可以获得信息的方式很少,为了解决这种问题,加快发展城市公交信息化，设计一个城市公交查询系统是具有一定实际应用意义的。</p>
-					<p></p>
-				</div>
 				
-				<!-- 轮播 -->
-				
-				<div id="myCarousel" class="carousel slide" >
-					    <!-- 轮播（Carousel）指标 -->
-					    <ol class="carousel-indicators">
-					        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					        <li data-target="#myCarousel" data-slide-to="1"></li>
-					        <li data-target="#myCarousel" data-slide-to="2"></li>
-					    </ol>   
-					    <!-- 轮播（Carousel）项目 -->
-					    <div class="carousel-inner">
-					        <div class="item active">
-					            <img src="/wp-content/uploads/2014/07/slide1.png" alt="First slide">
-					            <div class="carousel-caption">标题 1</div>
-					        </div>
-					        <div class="item">
-					            <img src="/wp-content/uploads/2014/07/slide2.png" alt="Second slide">
-					            <div class="carousel-caption">标题 2</div>
-					        </div>
-					        <div class="item">
-					            <img src="/wp-content/uploads/2014/07/slide3.png" alt="Third slide">
-					            <div class="carousel-caption">标题 3</div>
-					        </div>
-					    </div>
-					    <!-- 轮播（Carousel）导航 -->
-					    <a class="carousel-control left" href="#myCarousel" 
-					        data-slide="prev">&lsaquo;
-					    </a>
-					    <a class="carousel-control right" href="#myCarousel" 
-					        data-slide="next">&rsaquo;
-					    </a>
-				</div>
 				
 				
 				
