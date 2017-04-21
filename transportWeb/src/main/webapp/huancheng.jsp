@@ -40,7 +40,7 @@
 		<div id="sidebar">
 			<a href="#" class="visible-phone"><i class="icon icon-home"></i> 城市公交查询</a>
 			<ul>
-				<li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>首页</span></a></li>
+				<li class="active"><a href="index.jsp"><i class="icon icon-home"></i> <span>首页</span></a></li>
 				
 				<li class="submenu">
 					<a href="#"><i class="icon icon-file"></i><span>公交信息查询</span></a>
@@ -81,7 +81,7 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="alert alert-info">
-							您现在的位置: <strong>换乘查询</strong>
+							您的位置: <strong>换乘查询</strong>
 							<a href="#" data-dismiss="alert" class="close">×</a>
 						</div>
 					</div>	
@@ -94,7 +94,7 @@
 					    <p>换乘查询(起点-终点)</p>
 					  </div>
 						 <input type="address" id="inputaddress" class="form-control"  required autofocus>
-						 <span class="glyphicon glyphicon-arrow-right">--</span>
+						 <span class="glyphicon glyphicon-arrow-right">--></span>
 						 <!--  <span class="glyphicon glyphicon-arrow-left"></span>-->
 						 <input type="address" id="inputaddress" class="form-control"  required autofocus>
 					  <!-- Table -->

@@ -40,7 +40,7 @@
 		<div id="sidebar">
 			<a href="#" class="visible-phone"><i class="icon icon-home"></i> 城市公交查询</a>
 			<ul>
-				<li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>首页</span></a></li>
+				<li class="active"><a href="index.jsp"><i class="icon icon-home"></i> <span>首页</span></a></li>
 				
 				<li class="submenu">
 					<a href="#"><i class="icon icon-file"></i> <span>公交信息查询</span></a>
