@@ -1,8 +1,16 @@
 <%@ page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	/*机顶网址  防止路径出错    只有jsp特有*/
+	String path=request.getContextPath();  //  /douban
+	//                    http           ://      localhost            :       8080                /douban /       
+	String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title></title>
+		<base href="<%=basePath %>">
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="css/bootstrap.css" />
@@ -15,7 +23,7 @@
 		
 		
 		<div id="header">
-			<h1><a href="./dashboard.html">Unicorn Admin</a></h1>		
+			<h1><a href="./dashboard.html">城市公交查询</a></h1>		
 		</div>
 		
 		<div id="search">
@@ -23,26 +31,19 @@
 		</div>
 		<div id="user-nav" class="navbar navbar-inverse">
             <ul class="nav btn-group">
-                <li class="btn btn-inverse" ><a title="" href="#"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>
-                    <ul class="dropdown-menu">
-                        <li><a class="sAdd" title="" href="#">new message</a></li>
-                        <li><a class="sInbox" title="" href="#">inbox</a></li>
-                        <li><a class="sOutbox" title="" href="#">outbox</a></li>
-                        <li><a class="sTrash" title="" href="#">trash</a></li>
-                    </ul>
-                </li>
-                <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
-                <li class="btn btn-inverse"><a title="" href="login.jsp"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+                <li class="btn btn-inverse" ><a title="" href="#"><i class="icon icon-user"></i> <span class="text">个人中心</span></a></li>
+                <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">设置</span></a></li>
+                <li class="btn btn-inverse"><a title="" href="login.jsp"><i class="icon icon-share-alt"></i> <span class="text">退出</span></a></li>
             </ul>
         </div>
             
 		<div id="sidebar">
 			<a href="#" class="visible-phone"><i class="icon icon-home"></i> 城市公交查询</a>
 			<ul>
-				<li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>城市公交查询</span></a></li>
+				<li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>首页</span></a></li>
 				
 				<li class="submenu">
-					<a href="#"><i class="icon icon-file"></i> <span>查询操作</span> <span class="label">4</span></a>
+					<a href="#"><i class="icon icon-file"></i><span>公交信息查询</span></a>
 					<ul>
 						<li><a href="xianlu.jsp">线路查询</a></li>
 						<li><a href="zhandian.jsp">站点查询</a></li>
@@ -80,7 +81,7 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="alert alert-info">
-							Welcome in the <strong>Unicorn Admin 换乘查询</strong>
+							您现在的位置: <strong>换乘查询</strong>
 							<a href="#" data-dismiss="alert" class="close">×</a>
 						</div>
 					</div>	
@@ -88,17 +89,13 @@
 				
 				
 				<div class="panel panel-default">
-				 		<button type="button" class="btn btn-default" aria-label="Left Align">
-  <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
-</button>
-				 		
 					  <div class="panel-heading"><h3>换乘查询</h3></div>
 					  <div class="panel-body">
 					    <p>换乘查询(起点-终点)</p>
 					  </div>
 						 <input type="address" id="inputaddress" class="form-control"  required autofocus>
-						 <span class="glyphicon glyphicon-arrow-right"></span>
-						 <span class="glyphicon glyphicon-arrow-left"></span>
+						 <span class="glyphicon glyphicon-arrow-right">--</span>
+						 <!--  <span class="glyphicon glyphicon-arrow-left"></span>-->
 						 <input type="address" id="inputaddress" class="form-control"  required autofocus>
 					  <!-- Table -->
 					  <table class="table">
@@ -120,7 +117,7 @@
 				</div>
 				<div class="row-fluid">
 					<div id="footer" class="span12">
-						2016 - 2017 &copy; Unicorn Admin 方便你我他 <a href="https://wrapbootstrap.com/user/diablo9983"></a>
+						2016 - 2017 &copy;方便你我他 <a href="https://wrapbootstrap.com/user/diablo9983"></a>
 					</div>
 				</div>
 			</div>

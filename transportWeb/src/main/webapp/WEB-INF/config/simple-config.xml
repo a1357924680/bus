@@ -29,9 +29,9 @@
 	<!-- 静态资源的处理方式 -->
 	<mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
 	<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
-	<mvc:resources location="/easyui/" mapping="/easyui/**"></mvc:resources>
-	<mvc:resources location="/images/" mapping="/images/**"></mvc:resources>
-	<mvc:resources location="/ueditor/" mapping="/ueditor/**"></mvc:resources>
+	<mvc:resources location="/img/" mapping="/img/**"></mvc:resources>
+	<mvc:resources location="/static/" mapping="/static/**"></mvc:resources>
+	<mvc:resources location="/admin/" mapping="/admin/**"></mvc:resources>
 	<mvc:resources location="/" mapping="/*.html"></mvc:resources>
 
 
