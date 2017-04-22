@@ -118,11 +118,11 @@
    <thead>
    	<tr>
    		<th field="cb" checkbox="true" align="center"></th>
-   		<th field="id" width="100" align="center">编号</th>
-   		<th field="bname" width="100" align="center" formatter="formatTitle">公交名称</th>
-   		<th field="bline" width="150" align="center">线路信息</th><!-- 起点-终点 -->
-   		<th field="bbegin" width="100" align="center">早班车时间</th>
-   		<th field="bstop" width="100" align="center">末班车时间</th>
+   		<th field="bid" width="40" align="center">编号</th>
+   		<th field="bname" width="50" align="center" >公交名称</th>
+   		<th field="bline" width="200" align="center" resizable="true" nowrap="false">线路信息</th><!-- 起点-终点 -->
+   		<th field="bbegin" width="60" align="center">早班车时间</th>
+   		<th field="bstop" width="60" align="center">末班车时间</th>
    	</tr>
    </thead>
  </table>

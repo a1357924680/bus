@@ -206,7 +206,14 @@ public class BusBizImpl implements BusBiz {
 
 	@Override
 	public List<Bus> findBusByPage(Bus bus) throws Exception {
-		return baseDao.findAll(bus, "findBusByPage");
+		List<Bus> list=baseDao.findAll(bus, "findBusByPage");
+		List<Bus> newList=new ArrayList<Bus>();
+		for(Bus b:list){
+			String line=changetoName(b.getBline());
+			b.setBline(line);
+			newList.add(b);
+		}
+		return newList;
 	}
 	
 

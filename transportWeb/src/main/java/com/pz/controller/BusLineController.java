@@ -1,6 +1,7 @@
 package com.pz.controller;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -33,26 +34,25 @@ public class BusLineController {
 	
 	//后台查询及分页
 	@RequestMapping(value="/findAllByPage")
-	public @ResponseBody void JdDetailManager(HttpServletResponse response, @RequestParam String page,@RequestParam String rows) throws Exception {
+	public @ResponseBody String JdDetailManager(HttpServletResponse response, @RequestParam String page,@RequestParam String rows) throws Exception {
 		response.setCharacterEncoding("utf-8");
 		logger.info("findAllByPage called  ");
 		int pages=0;
 		int rowss=0;
-		if(page!=null && "".equals(page)){
+		if(page!=null && !"".equals(page)){
 			pages=Integer.parseInt(page);
 		}
 		
-		if(rows!=null && "".equals(rows)){
+		if(rows!=null && !"".equals(rows)){
 			rowss=Integer.parseInt(rows);
 		}
 		Bus bus=new Bus();
 		bus.setPageNum(pages);
 		bus.setPageSize(rowss);
-		
-		List<Bus> ListBusLine=this.busBiz.findBusByPage(bus);
-		PrintWriter out = response.getWriter();
+		List<Bus> listBusLine=this.busBiz.findBusByPage(bus);
+		System.out.println(listBusLine);
 		Gson gson = new Gson();
-		out.print(gson.toJson(ListBusLine));
+		return gson.toJson(listBusLine);
 	}
 	
 }
