@@ -30,7 +30,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="bname!=null">
 			and bname like #{bname}
 		</if>
+		
 	</select>
 	
+	<!-- 分页 -->
+	<select id="findBusByPage" parameterType="com.pz.bean.Bus"  resultType="com.pz.bean.Bus">
+		select * from (select rownum rm,a.* from
+		(select * from bus where 1=1
+		<if test="bline!=null">
+			and bline like #{bline}
+		</if>
+		<if test="bname!=null">
+			and bname like #{bname}
+		</if>
+		)a order by rm)where rm between (#{pageNum}-1)*#{pageSize}+1 and #{pageNum}*#{pageSize}
+	</select>
 	
 </mapper>

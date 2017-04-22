@@ -54,4 +54,9 @@ public class AdminsBizImpl implements AdminsBiz {
 		return null;
 	}
 
+	@Override
+	public List<Admins> findAdminsByPage(Admins admin) throws Exception {
+		return baseDao.findAll(admin, "findAdminsByPage");
+	}
+
 }

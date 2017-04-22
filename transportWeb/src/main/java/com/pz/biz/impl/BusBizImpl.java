@@ -202,6 +202,11 @@ public class BusBizImpl implements BusBiz {
 		}
 		return null;
 	}
+
+	@Override
+	public List<Bus> findBusByPage(Bus bus) throws Exception {
+		return baseDao.findAll(bus, "findBusByPage");
+	}
 	
 
 }

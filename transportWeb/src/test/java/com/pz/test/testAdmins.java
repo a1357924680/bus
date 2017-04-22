@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.pz.bean.Admins;
 import com.pz.biz.AdminsBiz;
 
 public class testAdmins {
@@ -50,11 +51,20 @@ public class testAdmins {
 		biz.deleteAdmin(aid);
 	}
 	
-	@Test
+	//@Test
 	public void test3() throws Exception {
 		String pwd="aaaaaa";
 		int aid=4;
 		System.out.println(biz.adminLogin(aid, pwd));
+	}
+	
+	@Test
+	public void test4() throws Exception {
+		Admins admin=new Admins();
+		admin.setAid(1);
+		admin.setPageNum(1);
+		admin.setPageSize(2);
+		System.out.println(biz.findAdminsByPage(admin));
 	}
 
 }

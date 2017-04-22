@@ -24,5 +24,8 @@ public interface BusBiz {
 	//起点终点查询
 	public Map<String, String> findByStartAndStop(int start,int stop)throws Exception;
 	
+	//分页
+	public List<Bus> findBusByPage(Bus bus)throws Exception;
+	
 	
 }

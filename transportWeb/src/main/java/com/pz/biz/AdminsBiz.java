@@ -1,5 +1,7 @@
 package com.pz.biz;
 
+import java.util.List;
+
 import com.pz.bean.Admins;
 
 public interface AdminsBiz {
@@ -15,4 +17,7 @@ public interface AdminsBiz {
 	
 	//管理员登录
 	public Admins adminLogin(int aid,String apwd) throws Exception;
+	
+	//管理员分页
+	public List<Admins> findAdminsByPage(Admins admin)throws Exception;
 }
