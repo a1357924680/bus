@@ -41,7 +41,7 @@ public class testStations {
 	@Test
 	public void test3() throws IOException {
 		Stations s=new Stations();
-		//s.setSid(4);
+		s.setSid(4);
 		//s.setSname("%市%");
 		s.setPageNum(1);
 		s.setPageSize(3);

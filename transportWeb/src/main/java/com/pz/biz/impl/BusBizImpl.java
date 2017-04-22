@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.annotation.Resource;
 
@@ -101,7 +102,7 @@ public class BusBizImpl implements BusBiz {
 	public Map<String, String> findByStartAndStop(int start, int stop) throws Exception {
 		
 		//将换乘信息都存到map中,键为公交名字,值为站点
-		Map<String, String> busMap=new HashMap<String,String>();
+		Map<String, String> busMap=new TreeMap<String,String>();
 		
 		//查找出通过起点的公交路线
 		Bus startBus=new Bus();

@@ -25,7 +25,7 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	<!-- 启用mvc的注解解析器 -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven/>
 	<!-- 静态资源的处理方式 -->
 	<mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
 	<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>

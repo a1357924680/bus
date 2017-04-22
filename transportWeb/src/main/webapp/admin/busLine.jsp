@@ -182,6 +182,7 @@
  	<a href="javascript:closeAddBusLineDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
  </div>
  <!-- 添加公交信息结束 -->
+ 
  <!-- 修改公交信息开始 -->
  <div id="updateBusLine"  class="easyui-dialog" style="width:500px;height:250px;padding: 10px 20px"
    closed="true" buttons="#update-buttons">

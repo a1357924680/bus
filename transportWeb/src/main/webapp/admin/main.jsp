@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    
+<%
 	/*机顶网址  防止路径出错    只有jsp特有*/
 	String path=request.getContextPath();  //  /douban
 	//                    http           ://      localhost            :       8080                /douban /       
 	String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@ page isELIgnored="false" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <base href="<%=basePath %>">
@@ -18,6 +18,7 @@
 <script type="text/javascript" src="static/jquery-easyui-1.3.3/jquery.min.js"></script>
 <script type="text/javascript" src="static/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="static/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
+
 <script type="text/javascript">
 
 	var url;

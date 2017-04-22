@@ -21,8 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete stations where sid=#{sid}
 	</delete>
 	
-	<!-- 查询站点信息 -->
-	<select id="selectStations" parameterType="com.pz.bean.Stations" resultType="com.pz.bean.Stations">
+	<!-- 分页查询站点信息 -->
+	<select id="selectStationsByPage" parameterType="com.pz.bean.Stations" resultType="com.pz.bean.Stations">
 		select * from(select rownum rm,a.* from 
 		(select * from stations where 1=1
 		<if test="sid!=0">
@@ -32,5 +32,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and sname like #{sname}
 		</if>
 		)a order by rm)where rm between (#{pageNum}-1)*#{pageSize}+1 and #{pageNum}*#{pageSize}
+	</select>
+	
+	<!-- 查看站点信息 -->
+	<select id="selectStations" parameterType="com.pz.bean.Stations" resultType="com.pz.bean.Stations">
+		select * from stations where 1=1
+		<if test="sid!=0">
+			and sid=#{sid}
+		</if>
+		<if test="sname!=null">
+			and sname like #{sname}
+		</if>
 	</select>
 </mapper>
