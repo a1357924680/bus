@@ -21,6 +21,7 @@
 
 <script type="text/javascript">
 
+
 	function formatBlogType(val,row){
 		return val.typeName;
 	}
@@ -108,10 +109,12 @@
 	}
 </script>
 </head>
+
 <body style="margin: 1px">
-<table id="dg" title="博客管理" class="easyui-datagrid"
-   pagination="true" rownumbers="true"
-   fit="true" toolbar="#tb">
+
+<table id="dg" title="公交管理" class="easyui-datagrid"
+   pagination="true" rownumbers="true"  fitColumns="true"
+    url="findAllByPage" fit="true" toolbar="#tb">
    <thead>
    	<tr>
    		<th field="cb" checkbox="true" align="center"></th>

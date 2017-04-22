@@ -11,8 +11,8 @@ public class Bus {
 	private int start;//查询起始站
 	private int stop;//查询终到站
 	
-	private int pageNum;
-	private int pageSize;
+	private int pageNum;  //第几页
+	private int pageSize;  //每页多少条
 	
 	public int getPageNum() {
 		return pageNum;
