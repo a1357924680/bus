@@ -44,7 +44,25 @@
 	
 	//修改密码操作
 	function updatePwd(){
-		
+		var newPassword=$('#newPassword').val();
+		var newPassword2=$('#newPassword2').val();
+		var currentUserPwd=$('#currentUserPwd').val();
+		if(newPassword!=currentUserPwd){
+			$.messager.alert('系统提示','原始密码不正确,请重新输入');
+			return;
+		}
+		if(newPassword==null || ''==newPassword.trim()){
+			$.messager.alert('系统提示','请输入原始密码');
+		}
+		if(newPassword2==null || ''==newPassword2.trim()){
+			$.messager.alert('系统提示','请输入新密码');
+		}
+		$.post('updatePwd',{'newPassword2':newPassword2},function(data){
+			if(data==1){
+				alert('修改密码成功,请重新登录');
+				window.location.href='admin/login.jsp';
+			}
+		},'json');
 	}
 	
 	
@@ -67,16 +85,7 @@
 			} 
 		 });
 	}
-	//刷新系统
-	function refreshSystem(){
-		$.post("admin/system/refreshSystem.do",{},function(result){
-			if(result.success){
-				$.messager.alert("系统提示","已成功刷新系统缓存！");
-			}else{
-				$.messager.alert("系统提示","刷新系统缓存失败！");
-			}
-		},"json");
-	}
+	
 
 </script>
 </head>
@@ -89,7 +98,8 @@
 			</td> --%>
 			<td width="50%"><h2>城市公交查询系统后台</h2></td>
 			<td valign="bottom" align="right" width="50%">
-				<font size="3">&nbsp;&nbsp;<strong>欢迎：</strong>${currentUser.userName }</font>
+				<font size="3">&nbsp;&nbsp;<strong>欢迎：</strong>${currentUser.aid }</font>
+				<input type="hidden" value="${currentUser.apwd }" id="currentUserPwd"/>
 			</td>
 		</tr>
 	</table>
@@ -145,7 +155,6 @@
  	<a href="javascript:updatePwd()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
    	<a href="javascript:closePasswordModifyDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
  </div>
- 
 
  
 </body>

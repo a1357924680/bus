@@ -20,9 +20,19 @@
 <script type="text/javascript" src="static/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
 
 <script type="text/javascript">
+
+$(function(){
+	showAdminsByPage();
+});	
 //弹出添加管理员框
 function addAdmin(){
 	$("#dlg").dialog("open").dialog("setTitle","添加管理员信息");
+}
+//关闭弹框
+function closeSaveAdminDialog(){
+	$("#dlg").dialog("close");
+	$("#newPassword").val("");
+	$("#newPassword2").val("");
 }
 //删除管理员
 function deleteAdmin(){
@@ -33,38 +43,59 @@ function deleteAdmin(){
 	 }
 	 var strIds=[];
 	 for(var i=0;i<selectedRows.length;i++){
-		 strIds.push(selectedRows[i].id);
+		 strIds.push(selectedRows[i].aid);
 	 }
 	 var ids=strIds.join(",");
 	 $.messager.confirm("系统提示","您确定要删除这<font color=red>"+selectedRows.length+"</font>条数据吗？",function(r){
 			if(r){
-				//在此处发送请求
+				$.post('deleteAdmins',{'ids':ids},function(data){
+					$.messager.alert("系统提示","已成功删除<font color=red>"+selectedRows.length+"</font>条数据");
+					$('#dg').datagrid('reload');
+				},'json');
 			} 
    });
 }
 //添加管理员
 function saveNewAdmin(){
-	
+	var newPassword=$('#newPassword').val();
+	var newPassword2=$('#newPassword2').val();
+	if(newPassword!=newPassword2){
+		$.messager.alert("系统提示",'两次输入的密码不一致,请重新确认密码');
+		return;
+	}
+	if(newPassword==null || newPassword2==null){
+		$.messager.alert("系统提示",'密码不能为空,请输入密码');
+		return;
+	}
+	$.post('saveNewAdmin',{'newPassword':newPassword},function(data){
+		if(data==1){
+			$.messager.alert("系统提示",'添加管理员成功');
+			$('#dg').datagrid('reload');
+			closeSaveAdminDialog();
+		}
+	},'json');
 }
-//关闭弹框
-function closeSaveAdminDialog(){
-	$("#dlg").dialog("close");
-	$("#newPassword").val("");
-	$("#newPassword2").val("");
+
+//显示管理员列表
+function showAdminsByPage(){
+	$('#dg').datagrid({
+	    url:'showAdminsByPage', 
+	    pagination:true, //显示分页工具栏
+	 	pageSize:4,
+	 	pageList:[2,4,6],
+	    columns:[[  
+	        {field:'ck',checkbox:true,width:100},   
+	        {field:'aid',title:'编号',width:100,align:'center'}  
+	    ]]   
+	});
 }
+
 	
 </script>
 </head>
 <body style="margin: 1px">
 <table id="dg" title="管理员管理" class="easyui-datagrid"
-   pagination="true" rownumbers="true"
-   fit="true" toolbar="#tb">
-   <thead>
-   	<tr>
-   		<th field="cb" checkbox="true" align="center"></th>
-   		<th field="id" width="100" align="center">编号</th>
-   	</tr>
-   </thead>
+   rownumbers="true" fit="true" toolbar="#tb">
  </table>
  <div id="tb">
  	<div>
@@ -72,6 +103,7 @@ function closeSaveAdminDialog(){
  		<a href="javascript:deleteAdmin()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除管理员</a>
  	</div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
  </div>
+ 
  
  <div id="dlg" class="easyui-dialog" style="width:400px;height:200px;padding: 10px 20px"
    closed="true" buttons="#dlg-buttons">

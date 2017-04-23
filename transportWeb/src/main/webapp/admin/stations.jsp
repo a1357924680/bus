@@ -36,6 +36,10 @@
 		 var row=selectedRows[0];
 		 $("#update").dialog("open").dialog("setTitle","编辑站点信息");
 		 $("#fm").form("load",row);
+		 var sid=selectedRows[0].sid;
+		 $.post('selectStationsById',{'id':sid},function(data){
+			 $('#sname2').val(data);
+		 },'json');
 	 }
 	 function closeStationsDialog(){
 		 $("#dlg").dialog("close");
@@ -56,46 +60,62 @@
 		}
 		var strIds=[];
 		for(var i=0;i<selectedRows.length;i++){
-			strIds.push(selectedRows[i].id);
+			strIds.push(selectedRows[i].sid);
 		}
+		
 		var ids=strIds.join(",");
 		$.messager.confirm("系统提示","您确定要删除这<font color=red>"+selectedRows.length+"</font>条数据吗？",function(r){
 			if(r){
-				//在此处发送请求
+				$.post('deleteStations',{'ids':ids},function(data){
+					$.messager.alert("系统提示","已成功删除<font color=red>"+selectedRows.length+"</font>条数据");
+					$('#dg').datagrid('reload');
+				},'json');
 			} 
 		});
 	}
 		//修改站点信息
 		function updateStations(){
+			var sname=$('#sname2').val();
+			if(sname==null || ''==sname.trim()){
+				$.messager.alert('系统提示','站点名称不能为空');
+				return;
+			}
+			var selectedRows=$("#dg").datagrid("getSelections");
+			var sid=selectedRows[0].sid;
+			$.post('updateStations',{'sname':sname,'id':sid},function(data){
+				if(data=='have'){
+					$.messager.alert('系统提示','该站点名已存在');
+				}else if(data==1){
+					$.messager.alert('系统提示','站点信息修改成功');
+					closeUpdateStationsDialog();
+					$('#dg').datagrid('reload');
+				}
+			},'json');
 			
 		}
 		//添加站点信息
 		function saveStations(){
-			 $("#fm").form("submit",{
-				url:url,
-				onSubmit:function(){
-					return $(this).form("validate");
-				},
-				success:function(result){
-					var result=eval('('+result+')');
-					if(result.success){
-						$.messager.alert("系统提示","保存成功！");
-						resetValue();
-						$("#dlg").dialog("close");
-						$("#dg").datagrid("reload");
-					}else{
-						$.messager.alert("系统提示","保存失败！");
-						return;
-					}
+			var sname=$('#sname1').val();
+			if(sname==null || ''==sname.trim()){
+				$.messager.alert('系统提示','站点名称不能为空');
+				return ;
+			}
+			$.post('saveStations',{'sname':sname},function(data){
+				if(data=='have'){
+					$.messager.alert('系统提示','该站点名已存在,无需重复添加');
+				}else if(data==1){
+					$.messager.alert('系统提示','站点添加成功');
+					closeStationsDialog();
+					$('#dg').datagrid('reload');
 				}
-			 });
+			},'json');
 		 }
 	 
 </script>
 </head>
 <body style="margin: 1px">
 <table id="dg" title="站点管理" class="easyui-datagrid"
-   pagination="true" rownumbers="true"
+   pagination="true" rownumbers="true" url="findStationsByPage"
    fit="true" toolbar="#tb">
    <thead>
    	<tr>

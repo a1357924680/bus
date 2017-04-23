@@ -25,7 +25,7 @@ public class StationsBizImpl implements StationsBiz {
 	public int insertStations(String sname) throws IOException {
 		Stations s=new Stations();
 		s.setSname(sname);
-		return baseDao.add(s,"insertStations");
+		return baseDao.add(s,"insertStation");
 	}
 	@Override
 	public int updateStation(Stations s) throws IOException {
@@ -41,6 +41,11 @@ public class StationsBizImpl implements StationsBiz {
 	@Override
 	public List<Stations> selectStations(Stations s) throws IOException {
 		return baseDao.findAll(s, "selectStations");
+	}
+
+	@Override
+	public List<Stations> selectStationsByPage(Stations s) throws Exception {
+		return baseDao.findAll(s, "selectStationsByPage");
 	}
 
 }

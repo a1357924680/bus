@@ -169,7 +169,7 @@ function checkForm(){
 <body>
 <DIV class="top_div">
 </DIV>
-<form action="blogger/login.do" method="post" onsubmit="return checkForm()">
+<form action="adminLogin" method="post" onsubmit="return checkForm()">
 	<DIV style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231); border-image: none; width: 400px; height: 200px; text-align: center;">
 		<DIV style="width: 165px; height: 96px; position: absolute;">
 			<DIV class="tou">
@@ -181,11 +181,11 @@ function checkForm(){
 		</DIV>
 		<P style="padding: 30px 0px 10px; position: relative;">
 			<SPAN class="u_logo"></SPAN>
-			<INPUT id="userName" name="userName" class="ipt" type="text" placeholder="请输入用户名"> 
+			<INPUT id="userName" name="aid" class="ipt" type="text" placeholder="请输入用户名"> 
 	    </P>
 		<P style="position: relative;">
-			<SPAN class="p_logo"></SPAN>         
-			<INPUT id="password" name="password" class="ipt"  type="password" placeholder="请输入密码">   
+			<SPAN class="p_logo"></SPAN>
+			<INPUT id="password" name="apwd" class="ipt"  type="password" placeholder="请输入密码">   
 	  	</P>
 		<DIV style="height: 50px; line-height: 50px; margin-top: 30px; border-top-color: rgb(231, 231, 231); border-top-width: 1px; border-top-style: solid;">
 			<P style="margin: 0px 35px 20px 45px;">

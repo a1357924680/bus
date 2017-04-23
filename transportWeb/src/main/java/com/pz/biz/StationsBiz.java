@@ -14,4 +14,6 @@ public interface StationsBiz {
 	public void deleteStation(int sid) throws IOException;
 	
 	public List<Stations> selectStations(Stations s)throws IOException;
+	
+	public List<Stations> selectStationsByPage(Stations s) throws Exception;
 }

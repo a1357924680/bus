@@ -32,6 +32,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="aid!=0">
 			and aid=#{aid}
 		</if>
-		)a order by rm)where rm between (#{pageNum}-1)*#{pageSize}+1 and #{pageNum}*#{pageSize}
+		order by aid)a order by rm)where rm between (#{pageNum}-1)*#{pageSize}+1 and #{pageNum}*#{pageSize}
 	</select>
 </mapper>
