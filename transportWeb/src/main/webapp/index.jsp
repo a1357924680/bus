@@ -77,7 +77,7 @@
 				<a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
 				<a href="#" class="current">城市公交查询</a>
 			</div>
-			<div class="container-fluid">
+			<div class="container-fluid" align="center">
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="alert alert-info">
@@ -87,45 +87,42 @@
 					</div>	
 				</div>
 				
-				
-				
-				<div class="panel panel-default">
-				 <div class="panel-heading"> <h3>系统分析</h3></div>
-				  <div class="panel-body">
-				   <p>我国城市公交乘客信息系统的发展处于一个较落后的水平,广大乘客可以获得信息的方式很少,为了解决这种问题,加快发展城市公交信息化，设计一个城市公交查询系统是具有一定实际应用意义的。</p>
-				  </div>
-				  <table class="table">
-    
-  					</table>
-				</div>
-				
-				<div>
-					<p>我国城市公交乘客信息系统的发展处于一个较落后的水平,广大乘客可以获得信息的方式很少,为了解决这种问题,加快发展城市公交信息化，设计一个城市公交查询系统是具有一定实际应用意义的。</p>
-					<p></p>
-				</div>
-				
 				<!-- 轮播 -->
-				
-				<div id="myCarousel" class="carousel slide" >
+				<div id="myCarousel" class="carousel slide" align="center" style="width:700px" data-interval="1000" data-wrap="true">
 					    <!-- 轮播（Carousel）指标 -->
 					    <ol class="carousel-indicators">
 					        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 					        <li data-target="#myCarousel" data-slide-to="1"></li>
 					        <li data-target="#myCarousel" data-slide-to="2"></li>
+					        <li data-target="#myCarousel" data-slide-to="3"></li>
+					        <li data-target="#myCarousel" data-slide-to="4"></li>
+					        <li data-target="#myCarousel" data-slide-to="5"></li>
 					    </ol>   
 					    <!-- 轮播（Carousel）项目 -->
-					    <div class="carousel-inner">
+					    <div class="carousel-inner" >
 					        <div class="item active">
-					            <img src="/wp-content/uploads/2014/07/slide1.png" alt="First slide">
-					            <div class="carousel-caption">标题 1</div>
+					            <img src="img/lunbo/1.jpg" alt="First slide">
+					            <div class="carousel-caption">公交图片 1</div>
 					        </div>
 					        <div class="item">
-					            <img src="/wp-content/uploads/2014/07/slide2.png" alt="Second slide">
-					            <div class="carousel-caption">标题 2</div>
+					            <img src="img/lunbo/2.jpg" alt="Second slide">
+					            <div class="carousel-caption">公交图片 2</div>
 					        </div>
 					        <div class="item">
-					            <img src="/wp-content/uploads/2014/07/slide3.png" alt="Third slide">
-					            <div class="carousel-caption">标题 3</div>
+					            <img src="img/lunbo/3.jpg" alt="Third slide">
+					            <div class="carousel-caption">公交图片 3</div>
+					        </div>
+					        <div class="item">
+					            <img src="img/lunbo/4.jpg" alt="forth slide">
+					            <div class="carousel-caption">公交图片 4</div>
+					        </div>
+					        <div class="item">
+					            <img src="img/lunbo/5.jpg" alt="fifth slide">
+					            <div class="carousel-caption">公交图片 5</div>
+					        </div>
+					        <div class="item">
+					            <img src="img/lunbo/6.jpg" alt="sixth slide">
+					            <div class="carousel-caption">公交图片 6</div>
 					        </div>
 					    </div>
 					    <!-- 轮播（Carousel）导航 -->
@@ -137,18 +134,6 @@
 					    </a>
 				</div>
 				
-				
-				
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="widget-box widget-calendar">
-							<div class="widget-title"><span class="icon"><i class="icon-calendar"></i></span><h5>Calendar</h5></div>
-							<div class="widget-content nopadding">
-								<div class="calendar"></div>
-							</div>
-						</div>
-					</div>
-				</div>
 				<div class="row-fluid">
 					<div id="footer" class="span12">
 						2016 - 2017 &copy;方便你我他 <a href="https://wrapbootstrap.com/user/diablo9983"></a>
@@ -160,7 +145,7 @@
 
             <script src="js/excanvas.min.js"></script>
             <script src="js/jquery.min.js"></script>
-            <script src="js/jquery.ui.custom.js"></script>
+            <script src="js/jquery-ui.custom.js"></script>
             <script src="js/bootstrap.min.js"></script>
             <script src="js/jquery.flot.min.js"></script>
             <script src="js/jquery.flot.resize.min.js"></script>
@@ -168,5 +153,10 @@
             <script src="js/fullcalendar.min.js"></script>
             <script src="js/unicorn.js"></script>
             <script src="js/unicorn.dashboard.js"></script>
+            <script type="text/javascript">
+            $('#myCarousel').carousel({
+            	interval: 1500
+            })
+            </script>
 	</body>
 </html>
