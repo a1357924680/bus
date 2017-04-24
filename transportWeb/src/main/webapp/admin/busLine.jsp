@@ -55,8 +55,25 @@
 	
 	//添加公交信息
 	function addBusLine(){
+		var bname=$('#bname1').val();
+		var bbegin=$('#bbegin1').val();
+		var bstop=$('#bstop1').val();
+		var hiddenLine='-'+$('#hiddenLine').val();
+		 $.post('addBusLine',{'bname':bname,'bbegin':bbegin,'bstop':bstop,'showLine':showLine},function(data){
+			if(data=='have'){
+				$.messager.alert('系统提示','该线路已存在,无需重复添加');
+			}
+			if(data>0){
+				$.messager.alert('系统提示','添加成功 ');
+				closeAddBusLineDialog();
+				$('#dg').datagrid('reload');
+			}else{
+				$.messager.alert('系统提示','添加失败  ');
+			}
+		},'json') 
 		
-	}	
+	}
+	
 	//修改公交信息
 	function updateBusLine(){
 		
@@ -74,17 +91,38 @@
 		
 	} 
 	
-	
 	//将路线信息添加到span中显示在界面上
 	function addToLine(){
+		
 		var hiddenStr=$('#hiddenLine').val();
 		var showStr=$('#showLine').text();
 		var value=$('#bline1').combobox('getValue');//获取到value,即站点id  hiddenLine
 		var text=$('#bline1').combobox('getText'); //获取text,即站点名称  showLine
-		hiddenStr+=value+"-";
-		showStr+=text+"->";
-		$('#hiddenLine').val(hiddenStr);
-		$('#showLine').text(showStr);
+		var strs=new Array();//定义数组
+		strs=hiddenStr.split('-');
+		var flag=false;
+		for(var i=0;i<strs.length;i++){
+			if(strs[i]==value){
+				flag=true;
+				break;
+			}
+		}
+		if(flag){
+			$.messager.confirm("系统提示","站点已存在你是否要再添加相同的站点 ？",function(r){
+				if(r){
+					flag=false;
+					hiddenStr+=value+"-";
+					showStr+=text+"->";
+					$('#hiddenLine').val(hiddenStr);
+					$('#showLine').text(showStr);
+				}
+			 });
+		}else{
+			hiddenStr+=value+"-";
+			showStr+=text+"->";
+			$('#hiddenLine').val(hiddenStr);
+			$('#showLine').text(showStr);
+		}
 	}
 	//清空路线
 	function resetToLine(){
@@ -138,9 +176,9 @@
  	</div>
  </div>
  <!-- 添加公交信息开始 -->
- <div id="addBusLine"  class="easyui-dialog" style="width:500px;height:250px;padding: 10px 20px"
+ <div id="addBusLine"  class="easyui-dialog" style="width:550px;height:300px;padding: 10px 20px"
    closed="true" buttons="#add-buttons">
- 	<form id="fm" method="post">
+ 	<form id="fm" method="post"  >
    	<table cellspacing="8px">
    		<tr>
    			<td>公交名称：</td>
@@ -155,17 +193,12 @@
    			<td><input type="text" id="bstop1" name="bstop" class="easyui-timespinner" required="true"data-options="showSeconds:false"/></td>
    		</tr>
    		<tr>
-   			<td>公交名称：</td>
+   			<td>站点名称：</td>
    			<td>
-   				<select id="bline1" name="bline" class="easyui-combobox"required="true">
-   					<option value="1">高铁站</option>  
-    				<option value="2">湖南工学院</option>  
-    				<option value="3">人人乐超市</option>  
-    				<option value="4">火车站</option>  
-    				<option value="5">南华大学</option>
-   				</select>
-   				<!-- <input id="bline1" class="easyui-combobox" name="bline"  
-    				data-options="valueField:'sid',textField:'sname',url:'get_data.php'" /> -->
+   				
+   				 <input id="bline1" class="easyui-combobox" name="bline" 
+    				data-options="valueField:'sid',textField:'sname',url:'findAllStations' " /> 
+    				
    				<a href="javascript:addToLine()" class="easyui-linkbutton" iconCls="icon-ok">添加到路线</a>
    				<a href="javascript:resetToLine()" class="easyui-linkbutton" iconCls="icon-cancel">清空路线</a>
 			</td>
@@ -177,10 +210,11 @@
    				<input id="hiddenLine" type="hidden"/>
    			</td>
    		</tr>
+   		
    	</table>
    </form>
  </div>
- <div id="add-buttons">
+  <div id="add-buttons">
  	<a href="javascript:addBusLine()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
  	<a href="javascript:closeAddBusLineDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
  </div>
