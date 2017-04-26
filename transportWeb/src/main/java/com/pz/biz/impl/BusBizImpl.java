@@ -54,7 +54,9 @@ public class BusBizImpl implements BusBiz {
 		if(bus.getBname()!=null){
 			bus.setBname(bus.getBname()+"%");
 		}
+		System.out.println(bus);
 		List<Bus> list=baseDao.findAll(bus, "findBus");
+		System.out.println(list);
 		return addToList(list);
 	}
 	

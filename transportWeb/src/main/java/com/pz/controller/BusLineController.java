@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
@@ -46,7 +47,8 @@ public class BusLineController {
 	
 	//后台查询及分页
 	@RequestMapping(value="/findAllByPage")
-	public @ResponseBody String BusLineManager(HttpServletResponse response, @RequestParam String page,@RequestParam String rows) throws Exception {
+	public @ResponseBody String JdDetailManager(HttpServletResponse response, @RequestParam String page,
+			@RequestParam String rows,@RequestParam String bname,@RequestParam String bline) throws Exception {
 		response.setCharacterEncoding("utf-8");
 		logger.info("findAllByPage called  ");
 		int pages=0;
@@ -61,6 +63,12 @@ public class BusLineController {
 		Bus bus=new Bus();
 		bus.setPageNum(pages);
 		bus.setPageSize(rowss);
+		if(bname!=null && !"".equals(bname.trim())){
+			bus.setBname(bname+"%");
+		}
+		if(bline!=null && !"".equals(bline.trim())){
+			bus.setBline("%-"+bline+"-%");
+		}
 		List<Bus> listBusLine=this.busBiz.findBusByPage(bus);
 		Gson gson = new Gson();
 		return gson.toJson(listBusLine);
@@ -78,26 +86,95 @@ public class BusLineController {
 		return gson.toJson(listStations);
 		
 	}
+	
 	//后台添加busLine
-	@RequestMapping(value="addBusLine")
-	public @ResponseBody String addBusLine(HttpServletResponse response,@RequestParam String bname,@RequestParam String bbegin,@RequestParam String bstop,@RequestParam String showLine) throws Exception{
+	@RequestMapping(value="/addBusLine")
+	public @ResponseBody String addBusLine(HttpServletResponse response,HttpServletRequest request) throws Exception{
 		response.setCharacterEncoding("utf-8");
 		logger.info("addBusLine called ");
 		Gson gson=new Gson();
 		Bus bus=new Bus();
+		String bname=request.getParameter("bname");
+		String bbegin=request.getParameter("bbegin");
+		String bstop=request.getParameter("bstop");
+		String hiddenLine=request.getParameter("hiddenLine");
+		
 		List<Bus>list=this.busBiz.findBus(bus);
 		for(Bus b:list){
 			if(bname.equals(b.getBname())){
 				return gson.toJson("have");
 			}
-			
 		}
 		bus.setBname(bname);
 		bus.setBbegin(bbegin);
 		bus.setBstop(bstop);
-		bus.setBline(showLine);
+		bus.setBline(hiddenLine);
 		int a=this.busBiz.insertBus(bus);
 		return gson.toJson(a);
+		
+	}
+	
+	//后台的修改
+	@RequestMapping(value="/updateBusLine")
+	public @ResponseBody String updateBusLine(HttpServletResponse response){
+		response.setCharacterEncoding("utf-8");
+		logger.info("addBusLine called ");
+		
+		
+		Gson gson = new Gson();
+		return null;
+	}
+	//后台的删除
+	@RequestMapping(value="/deleteBusLine")
+	public @ResponseBody String deleteBusLine(HttpServletResponse response,@RequestParam String ids) throws Exception{
+		response.setCharacterEncoding("utf-8");
+		logger.info("addBusLine called ");
+		Gson gson=new Gson();
+		String [] id=ids.split(",");
+		for(int i=0;i<id.length;i++){
+			if(id[i]!=null && !"".equals(id[i].trim())){
+				busBiz.deleteBus(Integer.parseInt(id[i]));
+			}
+		}
+		return gson.toJson(1);
+	}
+	
+	@RequestMapping(value = "/selectStationsById")
+	public @ResponseBody String selectStationsById(String id){
+		Gson gson=new Gson();
+		Bus s=new Bus();
+		int bid=0;
+		if(id!=null && !"".equals(id.trim())){
+			bid=Integer.parseInt(id);
+			s.setBid(bid);;
+		}
+		try {
+			List<Bus> list=this.busBiz.findBus(s);
+			if(list.size()>0 && list!=null){
+				return gson.toJson(list.get(0));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return gson.toJson(1);
+	}
+	@RequestMapping(value="/getBusTotal")
+	public @ResponseBody String getBusTotal(HttpServletResponse response,@RequestParam String bname,@RequestParam String bline) throws Exception {
+		response.setCharacterEncoding("utf-8");
+		logger.info("getBusTotal called  ");
+		
+		
+		Bus bus=new Bus();
+		
+		if(bname!=null && !"".equals(bname.trim())){
+			bus.setBname(bname+"%");
+		}
+		if(bline!=null && !"".equals(bline.trim())){
+			bus.setBline(bline);
+		}
+		List<Bus> listBusLine=this.busBiz.findBus(bus);
+		Gson gson = new Gson();
+		return gson.toJson(listBusLine.size());
 	}
 	
 }
