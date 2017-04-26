@@ -36,6 +36,13 @@
 	}
 	
 	//打开修改公交信息框
+	/* function openUpdateBusLine(){
+		$("#updateBusLine").dialog("open").dialog("setTitle","修改公交信息");
+		var rowData = $('#dg').datagrid('getSelected');	
+		$("#update_JdBasic").form('load',rowData);
+	} */
+	
+	//打开修改公交信息框
 	function openUpdateBusLine(){
 		var selectedRows=$("#dg").datagrid("getSelections");
 		if(selectedRows.length==0){
@@ -44,6 +51,11 @@
 		 }
 		 var row=selectedRows[0];
 		 $("#updateBusLine").dialog("open").dialog("setTitle","修改公交信息");
+		 $("#fm").form("load",row);
+		 var sid=selectedRows[0].sid;
+		 $.post('selectStationsById',{'id':sid},function(data){
+			 $('#bname2').val(data),$('#bbegin2').val(data),$('#bstop2').val(data),$('#hiddenLine').val(data);
+		 },'json');
 	}
 	
 	//关闭添加信息弹框
@@ -56,10 +68,14 @@
 	//添加公交信息
 	function addBusLine(){
 		var bname=$('#bname1').val();
+		if(bname==null || ''==bname.trim()){
+			$.messager.alert('系统提示','线路名称不能为空 ');
+			return ;
+		}
 		var bbegin=$('#bbegin1').val();
 		var bstop=$('#bstop1').val();
 		var hiddenLine='-'+$('#hiddenLine').val();
-		 $.post('addBusLine',{'bname':bname,'bbegin':bbegin,'bstop':bstop,'showLine':showLine},function(data){
+		$.post('addBusLine',{"bname":bname,"bbegin":bbegin,"bstop":bstop,"hiddenLine":hiddenLine},function(data){
 			if(data=='have'){
 				$.messager.alert('系统提示','该线路已存在,无需重复添加');
 			}
@@ -70,13 +86,36 @@
 			}else{
 				$.messager.alert('系统提示','添加失败  ');
 			}
-		},'json') 
+		},'json')
 		
+		$('bname1').val('');
+		$('bbegin1').val('');
+		$('bstop1').val('');
+		$('#hiddenLine').val('');
+		$('#showLine').text('');
 	}
 	
 	//修改公交信息
 	function updateBusLine(){
-		
+		var bname=$('#bname2').val();
+		if(bname==null || ''==bname.trim()){
+			$.messager.alert('系统提示','站点名称不能为空');
+			return;
+		}
+		var bbegin=$('#bbegin2').val();
+		var bstop=$('#bstop2').val();
+		var hiddenLine='-'+$('#hiddenLine').val();
+		var selectedRows=$("#dg").datagrid("getSelections");
+		var sid=selectedRows[0].sid;
+		$.post('updateStations',{'sname':sname,'id':sid},function(data){
+			if(data=='have'){
+				$.messager.alert('系统提示','该站点名已存在');
+			}else if(data==1){
+				$.messager.alert('系统提示','站点信息修改成功');
+				closeUpdateStationsDialog();
+				$('#dg').datagrid('reload');
+			}
+		},'json');
 	}
 	//删除公交信息
 	function deleteBusLine(){
@@ -85,6 +124,21 @@
 			 $.messager.alert("系统提示","请选择要删除的数据！");
 			 return;
 		 }
+		
+		var strIds=[];
+		for(var i=0;i<selectedRows.length;i++){
+			strIds.push(selectedRows[i].bid); //js数组  将元素添加到数组当中去 
+		}
+		
+		var ids=strIds.join(","); //将数组用逗号分隔 
+		$.messager.confirm("系统提示","您确定要删除这<font color=red>"+selectedRows.length+"</font>条数据吗？",function(r){
+			if(r){
+				$.post('deleteBusLine',{'ids':ids},function(data){
+					$.messager.alert("系统提示","已成功删除<font color=red>"+selectedRows.length+"</font>条数据");
+					$('#dg').datagrid('reload');
+				},'json');
+			} 
+		});
 	}
 	//搜索公交信息
 	function searchBline(){
@@ -221,13 +275,13 @@
  <!-- 添加公交信息结束 -->
  
  <!-- 修改公交信息开始 -->
- <div id="updateBusLine"  class="easyui-dialog" style="width:500px;height:250px;padding: 10px 20px"
+ <div id="updateBusLine"  class="easyui-dialog" style="width:550px;height:300px;padding: 10px 20px"
    closed="true" buttons="#update-buttons">
  	<form id="fm" method="post">
    	<table cellspacing="8px">
    		<tr>
    			<td>公交名称：</td>
-   			<td><input type="text" id="bname2" name="sname" class="easyui-validatebox" required="true"/></td>
+   			<td><input type="text" id="bname2" name="sname" class="easyui-validatebox" required="true" readOnly="readonly"/>&nbsp;<span style="color:red">(只读)</span></td>
    		</tr>
    		<tr>
    			<td>早班车时间：</td>
@@ -238,17 +292,11 @@
    			<td><input type="text" id="bstop2" name="bstop" class="easyui-timespinner" required="true"data-options="showSeconds:false"/></td>
    		</tr>
    		<tr>
-   			<td>公交名称：</td>
+   			<td>站点名称：</td>
    			<td>
-   				<select id="bline2" name="bline" class="easyui-combobox"required="true">
-   					<option value="aa">aitem1</option>  
-    				<option>bitem2</option>  
-    				<option>bitem3</option>  
-    				<option>ditem4</option>  
-    				<option>eitem5</option>
-   				</select>
-   				<!-- <input id="bline1" class="easyui-combobox" name="bline"  
-    				data-options="valueField:'sid',textField:'sname',url:'get_data.php'" /> -->
+   				<input id="bline1" class="easyui-combobox" name="bline" 
+    				data-options="valueField:'sid',textField:'sname',url:'findAllStations' " /> 
+   				
    				<a href="javascript:addToLine1()" class="easyui-linkbutton" iconCls="icon-ok">添加到路线</a>
    				<a href="javascript:resetToLine1()" class="easyui-linkbutton" iconCls="icon-cancel">清空路线</a>
 			</td>
