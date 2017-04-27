@@ -18,7 +18,7 @@
 <script type="text/javascript" src="static/jquery-easyui-1.3.3/jquery.min.js"></script>
 <script type="text/javascript" src="static/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="static/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
-
+<script type="text/javascript" src="static/jquery-easyui-1.3.3/jquery-form.js"></script>
 <script type="text/javascript">
 
 
@@ -36,14 +36,14 @@
 	}
 	
 	//打开修改公交信息框
-	/* function openUpdateBusLine(){
+	 function openUpdateBusLine(){
 		$("#updateBusLine").dialog("open").dialog("setTitle","修改公交信息");
 		var rowData = $('#dg').datagrid('getSelected');	
-		$("#update_JdBasic").form('load',rowData);
-	} */
+		$("#fm").form('load',rowData);
+	} 
 	
 	//打开修改公交信息框
-	function openUpdateBusLine(){
+	/* function openUpdateBusLine(){
 		var selectedRows=$("#dg").datagrid("getSelections");
 		if(selectedRows.length==0){
 			 $.messager.alert("系统提示","请选择要修改的数据！");
@@ -56,7 +56,7 @@
 		 $.post('selectStationsById',{'id':sid},function(data){
 			 $('#bname2').val(data),$('#bbegin2').val(data),$('#bstop2').val(data),$('#hiddenLine').val(data);
 		 },'json');
-	}
+	} */
 	
 	//关闭添加信息弹框
 	function closeAddBusLineDialog(){
