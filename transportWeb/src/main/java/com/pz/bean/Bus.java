@@ -1,7 +1,10 @@
 package com.pz.bean;
 
-public class Bus {
+import java.io.Serializable;
 
+public class Bus implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private int bid;//编号
 	private String bname;//100路
 	private String  bline;//路线

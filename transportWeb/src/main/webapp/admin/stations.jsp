@@ -60,10 +60,10 @@
 		}
 		var strIds=[];
 		for(var i=0;i<selectedRows.length;i++){
-			strIds.push(selectedRows[i].sid);
+			strIds.push(selectedRows[i].sid); //js数组  将元素添加到数组当中去 
 		}
 		
-		var ids=strIds.join(",");
+		var ids=strIds.join(","); //将数组用逗号分隔 
 		$.messager.confirm("系统提示","您确定要删除这<font color=red>"+selectedRows.length+"</font>条数据吗？",function(r){
 			if(r){
 				$.post('deleteStations',{'ids':ids},function(data){

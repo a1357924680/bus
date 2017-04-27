@@ -1,7 +1,11 @@
 package com.pz.bean;
 
-public class Stations {
+import java.io.Serializable;
 
+public class Stations implements Serializable{
+
+	
+	private static final long serialVersionUID = 1L;
 	private int sid;
 	private String sname;
 	
