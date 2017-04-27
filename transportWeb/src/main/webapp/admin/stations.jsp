@@ -37,7 +37,7 @@
 		 $("#update").dialog("open").dialog("setTitle","编辑站点信息");
 		 $("#fm").form("load",row);
 		 var sid=selectedRows[0].sid;
-		 $.post('selectStationsById',{'id':sid},function(data){
+		 $.post('selectStationsById1',{'id':sid},function(data){
 			 $('#sname2').val(data);
 		 },'json');
 	 }

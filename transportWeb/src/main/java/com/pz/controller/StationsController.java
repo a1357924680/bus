@@ -70,7 +70,7 @@ public class StationsController {
 	}
 	
 	//根据id查找站点名
-	@RequestMapping(value = "/selectStationsById")
+	@RequestMapping(value = "/selectStationsById1")
 	public @ResponseBody String selectStationsById(String id){
 		Gson gson=new Gson();
 		Stations s=new Stations();
