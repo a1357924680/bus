@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -176,5 +177,32 @@ public class BusLineController {
 		Gson gson = new Gson();
 		return gson.toJson(listBusLine.size());
 	}
+	
+	//换乘
+	@RequestMapping(value="/getAllBusFromTo")
+	public @ResponseBody String getAllBusFromTo(@RequestParam String start,@RequestParam String stop) throws Exception {
+		logger.info("getAllBusFromTo called  ");
+		int startStations=0;
+		int stopStations=0;
+		
+		if(start!=null && !"".equals(start.trim())){
+			startStations=Integer.parseInt(start);
+		}
+		if(stop!=null && !"".equals(stop.trim())){
+			stopStations=Integer.parseInt(stop);
+		}
+		Map<String, String>map=busBiz.findByStartAndStop(startStations, stopStations);
+		List<Bus> list=new ArrayList<Bus>();
+		for(Object obj:map.keySet()){
+			System.out.println(obj+"**"+map.get(obj));
+			Bus b=new Bus();
+			b.setBname(obj.toString());
+			b.setBline(map.get(obj));
+			list.add(b);
+		}
+		Gson gson = new Gson();
+		return gson.toJson(list);
+	}
+
 	
 }

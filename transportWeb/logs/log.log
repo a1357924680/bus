@@ -1,44 +1,4 @@
-2017-04-22 11:09:48  [ main:0 ] - [ INFO ]  Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@64af0f: startup date [Sat Apr 22 11:09:48 CST 2017]; root of context hierarchy
-2017-04-22 11:09:48  [ main:114 ] - [ INFO ]  Loading XML bean definitions from class path resource [beans.xml]
-2017-04-22 11:09:50  [ main:1746 ] - [ INFO ]  Loading properties file from URL [file:/D:/bus/transportWeb/target/classes/db.properties]
-2017-04-22 11:09:50  [ main:2555 ] - [ INFO ]  Looking for @ControllerAdvice: org.springframework.context.support.ClassPathXmlApplicationContext@64af0f: startup date [Sat Apr 22 11:09:48 CST 2017]; root of context hierarchy
-2017-04-22 11:10:14  [ main:0 ] - [ INFO ]  Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@64af0f: startup date [Sat Apr 22 11:10:14 CST 2017]; root of context hierarchy
-2017-04-22 11:10:14  [ main:141 ] - [ INFO ]  Loading XML bean definitions from class path resource [beans.xml]
-2017-04-22 11:10:14  [ main:917 ] - [ INFO ]  Loading properties file from URL [file:/D:/bus/transportWeb/target/classes/db.properties]
-2017-04-22 11:10:15  [ main:1150 ] - [ INFO ]  Looking for @ControllerAdvice: org.springframework.context.support.ClassPathXmlApplicationContext@64af0f: startup date [Sat Apr 22 11:10:14 CST 2017]; root of context hierarchy
-2017-04-22 11:11:36  [ main:0 ] - [ INFO ]  Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@64af0f: startup date [Sat Apr 22 11:11:36 CST 2017]; root of context hierarchy
-2017-04-22 11:11:36  [ main:50 ] - [ INFO ]  Loading XML bean definitions from class path resource [beans.xml]
-2017-04-22 11:11:36  [ main:450 ] - [ INFO ]  Loading properties file from URL [file:/D:/bus/transportWeb/target/classes/db.properties]
-2017-04-22 11:11:37  [ main:694 ] - [ INFO ]  Looking for @ControllerAdvice: org.springframework.context.support.ClassPathXmlApplicationContext@64af0f: startup date [Sat Apr 22 11:11:36 CST 2017]; root of context hierarchy
-2017-04-22 11:12:47  [ main:0 ] - [ INFO ]  Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1c95bea: startup date [Sat Apr 22 11:12:47 CST 2017]; root of context hierarchy
-2017-04-22 11:12:47  [ main:66 ] - [ INFO ]  Loading XML bean definitions from class path resource [beans.xml]
-2017-04-22 11:12:47  [ main:610 ] - [ INFO ]  Loading properties file from URL [file:/D:/bus/transportWeb/target/classes/db.properties]
-2017-04-22 11:12:48  [ main:1121 ] - [ INFO ]  Looking for @ControllerAdvice: org.springframework.context.support.ClassPathXmlApplicationContext@1c95bea: startup date [Sat Apr 22 11:12:47 CST 2017]; root of context hierarchy
-2017-04-22 11:16:56  [ main:0 ] - [ INFO ]  Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@fe7f80: startup date [Sat Apr 22 11:16:56 CST 2017]; root of context hierarchy
-2017-04-22 11:16:56  [ main:48 ] - [ INFO ]  Loading XML bean definitions from class path resource [beans.xml]
-2017-04-22 11:16:56  [ main:498 ] - [ INFO ]  Loading properties file from URL [file:/D:/bus/transportWeb/target/classes/db.properties]
-2017-04-22 11:16:57  [ main:921 ] - [ INFO ]  Looking for @ControllerAdvice: org.springframework.context.support.ClassPathXmlApplicationContext@fe7f80: startup date [Sat Apr 22 11:16:56 CST 2017]; root of context hierarchy
-2017-04-22 11:17:29  [ main:0 ] - [ INFO ]  Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1cb1d37: startup date [Sat Apr 22 11:17:29 CST 2017]; root of context hierarchy
-2017-04-22 11:17:29  [ main:144 ] - [ INFO ]  Loading XML bean definitions from class path resource [beans.xml]
-2017-04-22 11:17:30  [ main:814 ] - [ INFO ]  Loading properties file from URL [file:/D:/bus/transportWeb/target/classes/db.properties]
-2017-04-22 11:17:30  [ main:1068 ] - [ INFO ]  Looking for @ControllerAdvice: org.springframework.context.support.ClassPathXmlApplicationContext@1cb1d37: startup date [Sat Apr 22 11:17:29 CST 2017]; root of context hierarchy
-2017-04-22 11:19:39  [ main:0 ] - [ INFO ]  Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@fe7f80: startup date [Sat Apr 22 11:19:39 CST 2017]; root of context hierarchy
-2017-04-22 11:19:39  [ main:56 ] - [ INFO ]  Loading XML bean definitions from class path resource [beans.xml]
-2017-04-22 11:19:39  [ main:430 ] - [ INFO ]  Loading properties file from URL [file:/D:/bus/transportWeb/target/classes/db.properties]
-2017-04-22 11:19:39  [ main:708 ] - [ INFO ]  Looking for @ControllerAdvice: org.springframework.context.support.ClassPathXmlApplicationContext@fe7f80: startup date [Sat Apr 22 11:19:39 CST 2017]; root of context hierarchy
-2017-04-22 11:20:23  [ main:0 ] - [ INFO ]  Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@64af0f: startup date [Sat Apr 22 11:20:23 CST 2017]; root of context hierarchy
-2017-04-22 11:20:23  [ main:49 ] - [ INFO ]  Loading XML bean definitions from class path resource [beans.xml]
-2017-04-22 11:20:24  [ main:403 ] - [ INFO ]  Loading properties file from URL [file:/D:/bus/transportWeb/target/classes/db.properties]
-2017-04-22 11:20:24  [ main:626 ] - [ INFO ]  Looking for @ControllerAdvice: org.springframework.context.support.ClassPathXmlApplicationContext@64af0f: startup date [Sat Apr 22 11:20:23 CST 2017]; root of context hierarchy
-2017-04-22 11:22:43  [ main:0 ] - [ INFO ]  Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@10c16b7: startup date [Sat Apr 22 11:22:43 CST 2017]; root of context hierarchy
-2017-04-22 11:22:43  [ main:56 ] - [ INFO ]  Loading XML bean definitions from class path resource [beans.xml]
-2017-04-22 11:22:44  [ main:846 ] - [ INFO ]  Loading properties file from URL [file:/D:/bus/transportWeb/target/classes/db.properties]
-2017-04-22 11:22:44  [ main:1155 ] - [ INFO ]  Looking for @ControllerAdvice: org.springframework.context.support.ClassPathXmlApplicationContext@10c16b7: startup date [Sat Apr 22 11:22:43 CST 2017]; root of context hierarchy
-2017-04-22 23:24:33  [ main:0 ] - [ INFO ]  Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@15d63da: startup date [Sat Apr 22 23:24:33 CST 2017]; root of context hierarchy
-2017-04-22 23:24:33  [ main:143 ] - [ INFO ]  Loading XML bean definitions from class path resource [beans.xml]
-2017-04-22 23:24:34  [ main:1026 ] - [ INFO ]  Loading properties file from URL [file:/D:/bus/transportWeb/target/classes/db.properties]
-2017-04-22 23:24:34  [ main:1662 ] - [ INFO ]  Looking for @ControllerAdvice: org.springframework.context.support.ClassPathXmlApplicationContext@15d63da: startup date [Sat Apr 22 23:24:33 CST 2017]; root of context hierarchy
-2017-04-22 23:24:51  [ main:0 ] - [ INFO ]  Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@15d63da: startup date [Sat Apr 22 23:24:51 CST 2017]; root of context hierarchy
-2017-04-22 23:24:52  [ main:101 ] - [ INFO ]  Loading XML bean definitions from class path resource [beans.xml]
-2017-04-22 23:24:52  [ main:858 ] - [ INFO ]  Loading properties file from URL [file:/D:/bus/transportWeb/target/classes/db.properties]
-2017-04-22 23:24:53  [ main:1368 ] - [ INFO ]  Looking for @ControllerAdvice: org.springframework.context.support.ClassPathXmlApplicationContext@15d63da: startup date [Sat Apr 22 23:24:51 CST 2017]; root of context hierarchy
+2017-04-28 20:18:37  [ main:0 ] - [ INFO ]  Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@a77506: startup date [Fri Apr 28 20:18:37 CST 2017]; root of context hierarchy
+2017-04-28 20:18:37  [ main:334 ] - [ INFO ]  Loading XML bean definitions from class path resource [beans.xml]
+2017-04-28 20:18:41  [ main:4573 ] - [ INFO ]  Loading properties file from URL [file:/D:/bus/transportWeb/target/classes/db.properties]
+2017-04-28 20:18:43  [ main:6417 ] - [ INFO ]  Looking for @ControllerAdvice: org.springframework.context.support.ClassPathXmlApplicationContext@a77506: startup date [Fri Apr 28 20:18:37 CST 2017]; root of context hierarchy

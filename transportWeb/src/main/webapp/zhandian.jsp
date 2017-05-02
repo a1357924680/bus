@@ -176,7 +176,7 @@ function showBusByPage(x) {
 	if(x==1){
 		pageNum=1;
 	}else if(x==2){  
-		if(pageNum=1){
+		if(pageNum==1){
 			alert('当前页为第一页');
 		}else{
 			pageNum--;
