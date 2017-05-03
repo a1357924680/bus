@@ -140,25 +140,7 @@ public class BusLineController {
 		return gson.toJson(1);
 	}
 	
-	@RequestMapping(value = "/selectStationsById")
-	public @ResponseBody String selectStationsById(String id){
-		Gson gson=new Gson();
-		Bus s=new Bus();
-		int bid=0;
-		if(id!=null && !"".equals(id.trim())){
-			bid=Integer.parseInt(id);
-			s.setBid(bid);;
-		}
-		try {
-			List<Bus> list=this.busBiz.findBus(s);
-			if(list.size()>0 && list!=null){
-				return gson.toJson(list.get(0));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return gson.toJson(1);
-	}
+	
 	@RequestMapping(value="/getBusTotal")
 	public @ResponseBody String getBusTotal(HttpServletResponse response,@RequestParam String bname,@RequestParam String bline) throws Exception {
 		response.setCharacterEncoding("utf-8");
