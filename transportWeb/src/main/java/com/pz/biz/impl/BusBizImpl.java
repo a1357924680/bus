@@ -217,6 +217,12 @@ public class BusBizImpl implements BusBiz {
 		}
 		return newList;
 	}
+
+	@Override
+	public List<Bus> findBusById(Bus bus) {
+		List<Bus> list=baseDao.findAll(bus, "findBineById");
+		return list;
+	}
 	
 
 }

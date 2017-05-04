@@ -33,6 +33,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</select>
 	
+	<!--根据ID查询  -->
+	<select id="findBineById" parameterType="com.pz.bean.Bus"  resultType="com.pz.bean.Bus">
+		select bline from bus where bid=#{bid}
+	</select>
+	
 	<!-- 分页 -->
 	<select id="findBusByPage" parameterType="com.pz.bean.Bus"  resultType="com.pz.bean.Bus">
 		select * from (select rownum rm,a.* from

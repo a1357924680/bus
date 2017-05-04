@@ -61,7 +61,7 @@ public class testBus {
 			System.out.println(b);
 		}
 	}
-	@Test
+	//@Test
 	public void test5() throws Exception {
 		
 		Map<String, String>map=biz.findByStartAndStop(5, 10);
@@ -78,5 +78,12 @@ public class testBus {
 		bus.setPageSize(3);
 		System.out.println(biz.findBusByPage(bus));
 	}
+	@Test
+		public void test7() throws Exception {
+			Bus bus=new Bus();
+			bus.setBid(22);
+			System.out.println(biz.findBusById(bus));
+		}
+
 
 }

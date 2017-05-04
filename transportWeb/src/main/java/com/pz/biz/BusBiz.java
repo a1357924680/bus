@@ -27,5 +27,6 @@ public interface BusBiz {
 	//分页
 	public List<Bus> findBusByPage(Bus bus)throws Exception;
 	
-	
+	//根据ID查询bine
+	public List<Bus> findBusById(Bus bus);
 }

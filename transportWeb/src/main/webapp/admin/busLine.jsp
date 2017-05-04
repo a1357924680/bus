@@ -39,7 +39,13 @@
 	 function openUpdateBusLine(){
 		$("#updateBusLine").dialog("open").dialog("setTitle","修改公交信息");
 		var rowData = $('#dg').datagrid('getSelected');	
-		$("#fm").form('load',rowData);
+		//alert(rowData.bline);
+		alert(rowData.bid);
+		var bid=rowData.bid
+		$.post('selectblineById',{'bid':bid},function(data){
+			
+		},'json');
+		$("#updateBusLine").form('load',rowData);
 	} 
 	
 	//打开修改公交信息框
@@ -61,6 +67,11 @@
 	//关闭添加信息弹框
 	function closeAddBusLineDialog(){
 		$("#addBusLine").dialog("close");
+		resetToLine();
+		resetToLine1();
+	}
+	function closeUpdateBusLineDialog(){
+		$("#updateBusLine").dialog("close");
 		resetToLine();
 		resetToLine1();
 	}
@@ -178,11 +189,12 @@
 			$('#showLine').text(showStr);
 		}
 	}
-	//清空路线
+	// add时候的清空路线
 	function resetToLine(){
 		$('#hiddenLine').val('');
 		$('#showLine').text('');
 	}
+	
 	//将路线信息添加到span中显示在界面上
 	function addToLine1(){
 		var hiddenStr=$('#hiddenLine').val();
@@ -199,6 +211,14 @@
 		$('#hiddenLine').val('');
 		$('#showLine').text('');
 	}
+	
+	
+	
+	//update的 清空路线
+	function resetToLine2(){
+		$('#hiddenLine').val('');
+		$('#showLine2').text('');
+	}
 </script>
 </head>
 
@@ -206,7 +226,7 @@
 
 <table id="dg" title="公交管理" class="easyui-datagrid"
    pagination="true" rownumbers="true"  fitColumns="true"
-    url="findAllByPage" fit="true" toolbar="#tb">
+    url="findByPage"  fit="true" toolbar="#tb">
    <thead>
    	<tr>
    		<th field="cb" checkbox="true" align="center"></th>
@@ -224,15 +244,15 @@
  		<a href="javascript:openUpdateBusLine()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
  		<a href="javascript:deleteBusLine()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
  	</div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
- 	<div>
+ 	<!-- <div>
  		&nbsp;标题：&nbsp;<input type="text" id="s_title" size="20" onkeydown="if(event.keyCode==13) searchBlog()"/>
  		<a href="javascript:searchBline()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
- 	</div>
+ 	</div> -->
  </div>
  <!-- 添加公交信息开始 -->
  <div id="addBusLine"  class="easyui-dialog" style="width:550px;height:300px;padding: 10px 20px"
    closed="true" buttons="#add-buttons">
- 	<form id="fm" method="post"  >
+ 	<form id="fm"  method="post"  >
    	<table cellspacing="8px">
    		<tr>
    			<td>公交名称：</td>
@@ -277,11 +297,11 @@
  <!-- 修改公交信息开始 -->
  <div id="updateBusLine"  class="easyui-dialog" style="width:550px;height:300px;padding: 10px 20px"
    closed="true" buttons="#update-buttons">
- 	<form id="fm" method="post">
+ 	<form id="updateBusLine" method="post">
    	<table cellspacing="8px">
    		<tr>
    			<td>公交名称：</td>
-   			<td><input type="text" id="bname2" name="sname" class="easyui-validatebox" required="true" readOnly="readonly"/>&nbsp;<span style="color:red">(只读)</span></td>
+   			<td><input type="text" id="bname2" name="bname" class="easyui-validatebox" required="true" readOnly="readonly"/>&nbsp;<span style="color:red">(只读)</span></td>
    		</tr>
    		<tr>
    			<td>早班车时间：</td>
@@ -294,23 +314,24 @@
    		<tr>
    			<td>站点名称：</td>
    			<td>
-   				<input id="bline1" class="easyui-combobox" name="bline" 
+   				<input id="bline1" class="easyui-combobox" name="bline2" 
     				data-options="valueField:'sid',textField:'sname',url:'findAllStations' " /> 
    				
-   				<a href="javascript:addToLine1()" class="easyui-linkbutton" iconCls="icon-ok">添加到路线</a>
-   				<a href="javascript:resetToLine1()" class="easyui-linkbutton" iconCls="icon-cancel">清空路线</a>
+   				<a href="javascript:addToLine()" class="easyui-linkbutton" iconCls="icon-ok">添加到路线</a>
+   				<a href="javascript:resetToLine2()" class="easyui-linkbutton" iconCls="icon-cancel">清空路线</a>
 			</td>
    		</tr>
    		<tr>
    			<td>&nbsp</td>
-   			<td><spqn id="showLine"></spqn></td>
+   			<input id="hiddenLine2"   type="hidden"/>
+   			<td><textarea id="showLine2" name="bline"></textarea></td>
    		</tr>
    	</table>
    </form>
  </div>
  <div id="update-buttons">
  	<a href="javascript:updateBusLine()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
- 	<a href="javascript:closeAddBusLineDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+ 	<a href="javascript:closeUpdateBusLineDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
  </div>
  <!-- 修改公交信息结束 -->
 </body>

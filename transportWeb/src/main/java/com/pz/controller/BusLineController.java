@@ -74,6 +74,29 @@ public class BusLineController {
 		return gson.toJson(listBusLine);
 	}
 	
+	
+	//后台查询及分页
+		@RequestMapping(value="/findByPage")
+		public @ResponseBody String findAllByPage(HttpServletResponse response, @RequestParam String page,@RequestParam String rows) throws Exception {
+			response.setCharacterEncoding("utf-8");
+			logger.info("findByPage called  ");
+			int pages=0;
+			int rowss=0;
+			if(page!=null && !"".equals(page)){
+				pages=Integer.parseInt(page);
+			}
+			
+			if(rows!=null && !"".equals(rows)){
+				rowss=Integer.parseInt(rows);
+			}
+			Bus bus=new Bus();
+			bus.setPageNum(pages);
+			bus.setPageSize(rowss);
+			List<Bus> listBusLine=this.busBiz.findBusByPage(bus);
+			Gson gson = new Gson();
+			return gson.toJson(listBusLine);
+		}
+	
 	//后台查询所有的站点
 	@RequestMapping(value="/findAllStations")
 	public @ResponseBody String FindAllStation(HttpServletResponse response) throws IOException{
@@ -139,6 +162,22 @@ public class BusLineController {
 		return gson.toJson(1);
 	}
 	
+	/*//后台的删除
+	@RequestMapping(value="/selectblineById")
+	public @ResponseBody String selectblineById(HttpServletResponse response,@RequestParam String bid) throws Exception{
+		response.setCharacterEncoding("utf-8");
+		logger.info("selectblineById called ");
+		Bus bus=new Bus();
+		int id=0;
+		Gson gson=new Gson();
+		if(bid!=null && !"".equals(bid)){
+			id=Integer.parseInt(bid);
+		}
+		bus.setBid(id);
+		List<Bus>list= busBiz.findBusById(bus);
+		return gson.toJson(list);
+	}
+	*/
 	
 	@RequestMapping(value="/getBusTotal")
 	public @ResponseBody String getBusTotal(HttpServletResponse response,@RequestParam String bname,@RequestParam String bline) throws Exception {
