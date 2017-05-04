@@ -13,7 +13,7 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-
+ 
 	<!-- xml配置 即可多包扫描 和语句注解 混合使用 结合两者 的优点 删除了config 1.自己写的类使用注解(dao,biz controller(servlet)) 
 		2.不是自己写的，第三方框架的类、使用xml配置 3.AOP切面，也可以采用两种方法 a、事物处理 xml b、其他的切面增强 注解 -->
 	<!-- 扫描包 -->

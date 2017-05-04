@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="css/fullcalendar.css" />
 <link rel="stylesheet" href="css/unicorn.main.css" />
 <link rel="stylesheet" href="css/unicorn.grey.css" class="skin-color" />
+
+</script>
 </head>
 <body>
 
@@ -108,7 +110,7 @@
 				<select id="selectStop"></select>
 				<!-- Table -->
 				<table class="table">
-					<button type="button" class="btn btn-primary">查询</button>
+					<button type="button" class="btn btn-primary" onclick="getAllBusFromTo()">查询</button>
 				</table>
 			</div>
 
@@ -117,12 +119,28 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="widget-box widget-calendar">
-						<div class="widget-content nopadding" id="showBusLines"></div>
+						<div class="widget-content nopadding" id="showBusLines">
+							 <!-- <ul style="list-style: none;">
+									<li><span style="color:red">100路:</span>站点信息</li>
+									<li><span style="color:red">100路:</span>站点信息</li>
+									<li><span style="color:red">100路:</span>站点信息</li>
+									<li><span style="color:red">100路:</span>站点信息</li>
+								</ul> -->
+						
+						</div>
 						<div align="center">
-							<a href="javascript:showBusByPage(1)" title="首页">首页</a> 
-							<a href="javascript:showBusByPage(2)" title="上一页">上一页</a> 
-							<a href="javascript:showBusByPage(3)" title="下一页">下一页</a> 
-							<a href="javascript:showBusByPage(4)" title="尾页">尾页</a>
+							<a href="javascript:showBusLineByPage(1)" title="首页">首页</a> 
+							<a href="javascript:showBusLineByPage(2)" title="上一页">上一页</a> 
+							<a href="javascript:showBusLineByPage(3)" title="下一页">下一页</a> 
+							<a href="javascript:showBusLineByPage(4)" title="尾页">尾页</a>
+						</div>
+						<div id="showHidden">
+							<!-- <input type="hidden" value="1"/>
+							<input type="hidden" value="2"/>
+							<input type="hidden" value="3"/>
+							<input type="hidden" value="4"/>
+							<input type="hidden" value="5"/>
+							<input type="hidden" value="6"/>  -->
 						</div>
 					</div>
 				</div>
@@ -148,12 +166,82 @@
 	<script src="js/unicorn.js"></script>
 	<script src="js/unicorn.dashboard.js"></script>
 <script type="text/javascript">
+//加载下拉列表
 $.post('findAllStations',function(data){
 	for(var i=0;i<data.length;i++){
 		document.getElementById('selectStart').options.add(new Option(data[i].sname,data[i].sid));
 		document.getElementById('selectStop').options.add(new Option(data[i].sname,data[i].sid));
 	}
 },'json');
+//将所有换乘信息放到隐藏域中
+function getAllBusFromTo(){
+	var start = $("#selectStart option:selected").val();
+	var stop = $("#selectStop option:selected").val();
+	if(start==stop){
+		alert('起点终点为同一站点,请重新选择!!');
+		return;
+	}
+	$.post('getAllBusFromTo',{'start':start,'stop':stop},function(data){
+		var str='';
+		$('#showHidden').html('');
+		for(var i=0;i<data.length;i++){
+			str+='<input type="hidden" value="'+data[i].bname+'#'+data[i].bline+'"/>';
+		}
+		$('#showHidden').append(str);
+		showBusLineByPage(1);
+	},'json');
+	
+}
+var page=1;
+function showBusLineByPage(x){
+	//把所有的换乘信息都放在一个数组中
+	var strLines=[];
+	var obj=$('#showHidden>input');
+	var str='';
+	var total=obj.length;
+	var totalPage=0;
+	if(total%6==0){
+		totalPage=total/6;
+	}else{
+		totalPage=parseInt(total/6)+1;
+	}
+	if(total==0){
+		str+='对不起，目前无对应线路...';
+	}else{
+		if(x==1){//首页
+			page=1;
+		}else if(x==2){//上一页
+			if(page==1){
+				alert('当前页为第一页');
+			}else{
+				page--;
+			}
+		}else if(x==3){//下一页
+			if(page>=totalPage){//最后一页
+				alert('当前页为最后一页');
+			}else{
+				page++;
+			}
+		}else if(x==4){//末页
+			page=totalPage;
+		}
+		for(var i=0;i<obj.length;i++){
+			strLines.push($('#showHidden>input')[i].value);
+		}
+		str+='<ul style="list-style: none;">';
+		for(var j=(page-1)*6 ; j<page*6 ; j++){
+			//j=0;j<6;j++  ==> 第一页
+			//j=6;j<12;j++ ==> 第二页
+			// j=(page-1)*6;j<page*6;j++  第n页
+			str+='<li><span style="color:red">'+strLines[j].split("#")[0]+':</span>'+strLines[j].split("#")[1]+'</li>'
+		}
+		str+='</ul>';
+	}
+	$('#showBusLines').html('');
+	$('#showBusLines').append(str);
+}
+
+
 </script>
 </body>
 </html>
