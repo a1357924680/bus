@@ -80,7 +80,7 @@
 	function logout(){
 		$.messager.confirm("系统提示","您确定要退出系统吗？",function(r){
 			if(r){
-				window.location.href='/logout';
+				window.location.href='admin/login.jsp';
 			} 
 		 });
 	} 
@@ -91,7 +91,7 @@
 	function getLogingUser(){
 		$.post('getLogingUser',function(data){
 			if(data!=1){
-				$.messager.alert('系统提示','您还未登录,请先登录!!!');
+				alert('您还未登录,请先登录!!!');
 				window.location.href='admin/login.jsp';
 			}
 		},'json');
