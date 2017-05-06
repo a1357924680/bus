@@ -208,21 +208,21 @@ function showBusLineByPage(x){
 	if(total==0){
 		str+='对不起，目前无对应线路...';
 	}else{
-		if(x==1){//首页
+		if(x==1){
 			page=1;
-		}else if(x==2){//上一页
+		}else if(x==2){
 			if(page==1){
 				alert('当前页为第一页');
 			}else{
 				page--;
 			}
-		}else if(x==3){//下一页
-			if(page>=totalPage){//最后一页
+		}else if(x==3){
+			if(page>=totalPage){
 				alert('当前页为最后一页');
 			}else{
 				page++;
 			}
-		}else if(x==4){//末页
+		}else if(x==4){
 			page=totalPage;
 		}
 		for(var i=0;i<obj.length;i++){
@@ -230,10 +230,9 @@ function showBusLineByPage(x){
 		}
 		str+='<ul style="list-style: none;">';
 		for(var j=(page-1)*6 ; j<page*6 ; j++){
-			//j=0;j<6;j++  ==> 第一页
-			//j=6;j<12;j++ ==> 第二页
-			// j=(page-1)*6;j<page*6;j++  第n页
-			str+='<li><span style="color:red">'+strLines[j].split("#")[0]+':</span>'+strLines[j].split("#")[1]+'</li>'
+			if(strLines.length>j){
+				str+='<li><span style="color:red">'+strLines[j].split("#")[0]+':</span>'+strLines[j].split("#")[1]+'</li>';
+			}
 		}
 		str+='</ul>';
 	}

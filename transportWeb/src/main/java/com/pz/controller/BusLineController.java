@@ -81,6 +81,7 @@ public class BusLineController {
 		public @ResponseBody String findAllByPage(HttpServletResponse response, @RequestParam String page,@RequestParam String rows) throws Exception {
 			response.setCharacterEncoding("utf-8");
 			logger.info("findByPage called  ");
+			System.out.println(page+"-------"+rows);
 			int pages=0;
 			int rowss=0;
 			if(page!=null && !"".equals(page)){
@@ -93,7 +94,9 @@ public class BusLineController {
 			Bus bus=new Bus();
 			bus.setPageNum(pages);
 			bus.setPageSize(rowss);
+			System.out.println(bus);
 			List<Bus> listBusLine=this.busBiz.findBusByPage(bus);
+			System.out.println(listBusLine.size());
 			Gson gson = new Gson();
 			return gson.toJson(listBusLine);
 		}
