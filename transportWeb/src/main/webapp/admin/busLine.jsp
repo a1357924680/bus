@@ -40,29 +40,13 @@
 		$("#updateBusLine").dialog("open").dialog("setTitle","修改公交信息");
 		var rowData = $('#dg').datagrid('getSelected');	
 		//alert(rowData.bline);
-		alert(rowData.bid);
+		//alert(rowData.bid);
 		var bid=rowData.bid
-		$.post('selectblineById',{'bid':bid},function(data){
+		/* $.post('selectblineById',{'bid':bid},function(data){
 			
-		},'json');
+		},'json'); */
 		$("#updateBusLine").form('load',rowData);
-	} 
-	
-	//打开修改公交信息框
-	/* function openUpdateBusLine(){
-		var selectedRows=$("#dg").datagrid("getSelections");
-		if(selectedRows.length==0){
-			 $.messager.alert("系统提示","请选择要修改的数据！");
-			 return;
-		 }
-		 var row=selectedRows[0];
-		 $("#updateBusLine").dialog("open").dialog("setTitle","修改公交信息");
-		 $("#fm").form("load",row);
-		 var sid=selectedRows[0].sid;
-		 $.post('selectStationsById',{'id':sid},function(data){
-			 $('#bname2').val(data),$('#bbegin2').val(data),$('#bstop2').val(data),$('#hiddenLine').val(data);
-		 },'json');
-	} */
+	}
 	
 	//关闭添加信息弹框
 	function closeAddBusLineDialog(){
@@ -109,22 +93,23 @@
 	//修改公交信息
 	function updateBusLine(){
 		var bname=$('#bname2').val();
-		if(bname==null || ''==bname.trim()){
-			$.messager.alert('系统提示','站点名称不能为空');
-			return;
-		}
 		var bbegin=$('#bbegin2').val();
 		var bstop=$('#bstop2').val();
-		var hiddenLine='-'+$('#hiddenLine').val();
+		var hiddenLine='-'+$('#hiddenLine2').val();
 		var selectedRows=$("#dg").datagrid("getSelections");
-		var sid=selectedRows[0].sid;
-		$.post('updateStations',{'sname':sname,'id':sid},function(data){
+		var sid=selectedRows[0].bid;
+		$.post('updateBusLine',{'bname':bname,'id':sid,'bbegin':bbegin,'bstop':bstop,'hiddenLine':hiddenLine},function(data){
+			alert(data);
 			if(data=='have'){
-				$.messager.alert('系统提示','该站点名已存在');
+				$.messager.alert('系统提示','该公交路线名已存在');
 			}else if(data==1){
-				$.messager.alert('系统提示','站点信息修改成功');
-				closeUpdateStationsDialog();
+				$.messager.alert('系统提示','公交路线修改成功信息修改成功');
+				closeUpdateBusLineDialog();
 				$('#dg').datagrid('reload');
+			}else if(data=='time'){
+				$.messager.alert('系统提示','早班车时间与末班车时间不合法,清重新输入');
+			}else{
+				$.messager.alert('系统提示','修改失败');
 			}
 		},'json');
 	}
@@ -212,13 +197,54 @@
 		$('#showLine').text('');
 	}
 	
-	
-	
 	//update的 清空路线
 	function resetToLine2(){
-		$('#hiddenLine').val('');
-		$('#showLine2').text('');
+		$('#hiddenLine2').val('');
+		$('#showLine2').val('');
 	}
+	
+	//修改时候的 添加公交信息
+	function addBusLine2(){
+		var bname=$('#bname1').val();
+		if(bname==null || ''==bname.trim()){
+			$.messager.alert('系统提示','线路名称不能为空 ');
+			return ;
+		}
+		var bbegin=$('#bbegin1').val();
+		var bstop=$('#bstop1').val();
+		var hiddenLine='-'+$('#hiddenLine').val();
+		$.post('addBusLine',{"bname":bname,"bbegin":bbegin,"bstop":bstop,"hiddenLine":hiddenLine},function(data){
+			if(data=='have'){
+				$.messager.alert('系统提示','该线路已存在,无需重复添加');
+			}
+			if(data>0){
+				$.messager.alert('系统提示','添加成功 ');
+				closeAddBusLineDialog();
+				$('#dg').datagrid('reload');
+			}else{
+				$.messager.alert('系统提示','添加失败  ');
+			}
+		},'json')
+		
+		$('bname1').val('');
+		$('bbegin1').val('');
+		$('bstop1').val('');
+		$('#hiddenLine').val('');
+		$('#showLine').text('');
+	}
+	
+	//将路线信息添加到span中显示在界面上
+	function addToLine2(){
+		var hiddenStr=$('#hiddenLine2').val();
+		var showStr=$('#showLine2').val();
+		var value=$('#bline2').combobox('getValue');//获取到value,即站点id  hiddenLine
+		var text=$('#bline2').combobox('getText'); //获取text,即站点名称  showLine
+		hiddenStr+=value+"-";
+		showStr+=text+"->";
+		$('#hiddenLine2').val(hiddenStr);
+		$('#showLine2').val(showStr);
+	}
+	
 </script>
 </head>
 
@@ -314,17 +340,17 @@
    		<tr>
    			<td>站点名称：</td>
    			<td>
-   				<input id="bline1" class="easyui-combobox" name="bline2" 
+   				<input id="bline2" class="easyui-combobox" name="bline2" 
     				data-options="valueField:'sid',textField:'sname',url:'findAllStations' " /> 
    				
-   				<a href="javascript:addToLine()" class="easyui-linkbutton" iconCls="icon-ok">添加到路线</a>
+   				<a href="javascript:addToLine2()" class="easyui-linkbutton" iconCls="icon-ok">添加到路线</a>
    				<a href="javascript:resetToLine2()" class="easyui-linkbutton" iconCls="icon-cancel">清空路线</a>
 			</td>
    		</tr>
    		<tr>
    			<td>&nbsp</td>
-   			<input id="hiddenLine2"   type="hidden"/>
-   			<td><textarea id="showLine2" name="bline"></textarea></td>
+   			<input id="hiddenLine2"  type="hidden"/>
+   			<td><textarea id="showLine2" name="bline" readOnly="readonly"></textarea>&nbsp;<span style="color:red">(只读)</span></td>
    		</tr>
    	</table>
    </form>

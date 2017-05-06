@@ -140,13 +140,30 @@ public class BusLineController {
 	
 	//后台的修改
 	@RequestMapping(value="/updateBusLine")
-	public @ResponseBody String updateBusLine(HttpServletResponse response){
-		response.setCharacterEncoding("utf-8");
-		logger.info("addBusLine called ");
+	public @ResponseBody String updateBusLine(@RequestParam String id,@RequestParam String bname,
+			@RequestParam String bbegin,@RequestParam String bstop,@RequestParam String hiddenLine) throws Exception{
+		logger.info("upateBusLine called ");
+		System.out.println(id+"--"+bbegin+"--"+bstop+"--"+hiddenLine);
+		Bus bus=new Bus();
+		Gson gson=new Gson();
+		int bid=0;
+		if(id!=null && !"".equals(id.trim())){
+			bid=Integer.parseInt(id);
+			bus.setBid(bid);
+		}
+		System.out.println("bbegin.compareTo(bstop)==>"+bbegin.compareTo(bstop));
+		if(bbegin.compareTo(bstop)>=0){
+			return gson.toJson("time");
+		}else{
+			bus.setBbegin(bbegin);
+			bus.setBstop(bstop);
+		}
+		bus.setBname(bname);
+		bus.setBline(hiddenLine);
+		System.out.println(bus);
+		int x=busBiz.updateBus(bus);
 		
-		
-		Gson gson = new Gson();
-		return null;
+		return gson.toJson(x);
 	}
 	//后台的删除
 	@RequestMapping(value="/deleteBusLine")
@@ -163,22 +180,6 @@ public class BusLineController {
 		return gson.toJson(1);
 	}
 	
-	/*//后台的删除
-	@RequestMapping(value="/selectblineById")
-	public @ResponseBody String selectblineById(HttpServletResponse response,@RequestParam String bid) throws Exception{
-		response.setCharacterEncoding("utf-8");
-		logger.info("selectblineById called ");
-		Bus bus=new Bus();
-		int id=0;
-		Gson gson=new Gson();
-		if(bid!=null && !"".equals(bid)){
-			id=Integer.parseInt(bid);
-		}
-		bus.setBid(id);
-		List<Bus>list= busBiz.findBusById(bus);
-		return gson.toJson(list);
-	}
-	*/
 	
 	@RequestMapping(value="/getBusTotal")
 	public @ResponseBody String getBusTotal(HttpServletResponse response,@RequestParam String bname,@RequestParam String bline) throws Exception {

@@ -110,5 +110,15 @@ public class AdminsController {
 		return gson.toJson(1);
 	}
 	
+	@RequestMapping(value = "/getLogingUser")
+	public @ResponseBody String getLogingUser(HttpSession session){
+		Gson gson=new Gson();
+		Admins admin=(Admins) session.getAttribute("currentUser");
+		if(admin!=null){
+			return gson.toJson(1);
+		}
+		return gson.toJson(0);
+	}
+	
 	
 }

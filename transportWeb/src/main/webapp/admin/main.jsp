@@ -20,7 +20,6 @@
 <script type="text/javascript" src="static/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
 
 <script type="text/javascript">
-
 	var url;
 	
 	function openTab(text,url,iconCls){
@@ -81,11 +80,22 @@
 	function logout(){
 		$.messager.confirm("系统提示","您确定要退出系统吗？",function(r){
 			if(r){
-				window.location.href='admin/blogger/logout.do';
+				window.location.href='/logout';
 			} 
 		 });
+	} 
+	//在页面加载时就访问该方法
+	$(function(){
+		getLogingUser();
+	});
+	function getLogingUser(){
+		$.post('getLogingUser',function(data){
+			if(data!=1){
+				$.messager.alert('系统提示','您还未登录,请先登录!!!');
+				window.location.href='admin/login.jsp';
+			}
+		},'json');
 	}
-	
 
 </script>
 </head>
