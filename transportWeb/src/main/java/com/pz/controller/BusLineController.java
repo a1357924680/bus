@@ -146,7 +146,6 @@ public class BusLineController {
 	public @ResponseBody String updateBusLine(@RequestParam String id,@RequestParam String bname,
 			@RequestParam String bbegin,@RequestParam String bstop,@RequestParam String hiddenLine) throws Exception{
 		logger.info("upateBusLine called ");
-		System.out.println(id+"--"+bbegin+"--"+bstop+"--"+hiddenLine);
 		Bus bus=new Bus();
 		Gson gson=new Gson();
 		int bid=0;
